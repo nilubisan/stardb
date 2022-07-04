@@ -11,17 +11,18 @@ const RandomPlanet = () => {
         setLoading(true);
         const id = Math.floor(Math.random()*25) + 2;
         swapiService.getPlanet(id).then((planet) => {
+            console.log(planet);
             setLoading(false);
             setPlanet(planet);
         });
     }
-    useEffect(setRandomPlanet, [swapiService]);
+    useEffect(setRandomPlanet, [setPlanet]);
     const {id, name, population, rotationPeriod, diameter} = planet;
     if(loading) return <Loader />
+    if(planet.id)
     return (
             <div className="random-planet jumbotron rounded">
-                <img className="planet-image"
-                     src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} />
+                <div className="planet-image" style={{background: `url(https://starwars-visualguide.com/assets/img/planets/${id}.jpg), url(https://starwars-visualguide.com/assets/img/big-placeholder.jpg) center center`}} />
                 <div>
                     <h4>{name}</h4>
                     <ul className="list-group list-group-flush">
