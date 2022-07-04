@@ -2,6 +2,7 @@ import React from "react";
 
 import Header from "../header/Header";
 import RandomPlanet from "../randomPlanet/RandomPlanet";
+import Loader from "../loader/Loader"
 // import ItemList from "../itemList/ItemList";
 // import PersonDetails from "../personDetails/PersonDetails";
 
