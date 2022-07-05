@@ -1,67 +1,41 @@
-import React, { useEffect, useState } from 'react'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import CardMedia from '@mui/material/CardMedia'
-import Typography from '@mui/material/Typography'
-import { CardActionArea } from '@mui/material'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemText from '@mui/material/ListItemText'
-import Loader from '../loader/Loader'
+import React, { useEffect, useState } from 'react';
+import PlanetView from './PlanetView';
+import Loader from '../loader/Loader';
+import ErrorIndicator from '../errorIndicator/ErrorIndicator';
 import swapiService from '../../services/swapiService';
 import {getRandomPlanetId} from '../../utils/utils';
-import './random-planet.css'
+import './random-planet.css';
 
 const RandomPlanet = () => {
-    const [ planet, setPlanet ] = useState({})
-    const [ loading, setLoading ] = useState(false)
+    const [ planet, setPlanet ] = useState({});
+    const [ isLoading, setIsLoading ] = useState(false);
+    const [isError, setIsError] = useState(null);
     const setRandomPlanet = () => {
-        setLoading(true)
-        const id = getRandomPlanetId()
+        setIsLoading(true)
+        const id = getRandomPlanetId();
         swapiService.getPlanet(id).then((planet) => {
             setPlanet(planet)
-            setLoading(false)
+            setIsLoading(false)
+        }).catch((error) => {
+            setIsLoading(false);
+            setIsError(error.name);
+            console.log(error);
         })
-    }
+    };
 
-    useEffect(setRandomPlanet, [ setPlanet ])
+    useEffect(setRandomPlanet, [ setPlanet ]);
+
+    const loading = (isLoading && !isError) ? <Loader /> : null;
+    const error = (isError && !isLoading) ? <ErrorIndicator /> : null;
+    const content = (!isLoading && !isError && planet.id) ? <PlanetView planet={planet} /> : null
 
     return (
         <div className="random-planet__container">
-            { loading ? (
-                <Loader/>
-            ) : planet.id ? (
-                    <div className="random-planet__container">
-                        <Card sx={ { maxWidth: 345 } }>
-                            <CardActionArea>
-                                <CardMedia
-                                    component="img"
-                                    height="auto"
-                                    image={ planet.imgSrc }
-                                    alt={ planet.name }
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div">
-                                        { planet.name }
-                                    </Typography>
-                                    <List>
-                                        <ListItem disablePadding>
-                                            <ListItemText primary ={`Population: ${ planet.population }`} />
-                                        </ListItem>
-                                        <ListItem disablePadding>
-                                            <ListItemText primary={`Rotation Period: ${ planet.rotationPeriod }`} />
-                                        </ListItem>
-                                        <ListItem disablePadding>
-                                            <ListItemText primary={`Diameter: ${ planet.diameter }`} />
-                                        </ListItem>
-                                    </List>
-                                </CardContent>
-                            </CardActionArea>
-                        </Card>
-                    </div>
-            ) : null}
+            {loading}
+            {error}
+            {content}
         </div>
-    )
+    );
 }
 
 export default RandomPlanet
