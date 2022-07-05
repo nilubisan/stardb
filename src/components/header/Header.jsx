@@ -27,9 +27,9 @@ const pages = ['People', 'Planets', 'Starships'];
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+    <AppBar position="static" style={{ background: 'rgba(0,0,0, 0.3)' }}>
+      <Container maxWidth="xl" >
+        <Toolbar disableGutters >
         <Box
             component="img"
             sx={{
