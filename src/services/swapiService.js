@@ -1,7 +1,11 @@
+import {isObjectEmpty} from '../utils/utils'
+
 const GET_ALL_PEOPLE_PATH = "people";
 const GET_ALL_PLANETS_PATH = "planets";
 const GET_ALL_STARSHIPS = "starships";
-const apiBase = 'https://swapi.dev/api/';
+const API_BASE_URL = 'https://swapi.dev/api/';
+const  API_GET_IMG_URL = 'https://starwars-visualguide.com/assets/img/';
+const API_PLACEHOLDER_IMG_URL = 'https://starwars-visualguide.com/assets/img/big-placeholder.jpg';
 
 const extractId = (item) => {
     const idRegExp = /\/(\d*)\/$/;
@@ -12,6 +16,7 @@ const transformPlanet = (planet) => {
     return {
         id: extractId(planet),
         name: planet.name,
+        imgSrc: planet.imgSrc,
         population: planet.population,
         rotationPeriod: planet.rotation_period,
         diameter: planet.diameter
@@ -43,13 +48,22 @@ const transformPerson = (person) => {
 };
 
 const swapiService = {
-    async getResource(url) {
-        const fetchURL = `${ apiBase }${ url }`;
-        const res = await fetch(fetchURL);
-        if(!res.ok) {
-            throw new Error(`Could not fetch ${ url } received ${ res.status }`);
+    async getResource(url, params) {
+        if( !params || isObjectEmpty(params)) {
+            const fetchURL = `${ API_BASE_URL }${ url }`;
+            const res = await fetch(fetchURL);
+            if(!res.ok) {
+                throw new Error(`Could not fetch ${ url } received ${ res.status }`);
+            }
+            return await res.json();
+        } else {
+            if(params.checkIsAvailable) {
+                const fetchURL = `${ API_GET_IMG_URL }${ url }`;
+                const res = await fetch(fetchURL);
+                return res.status !== 404;
+            }
         }
-        return await res.json();
+
     },
 
     async getAllPeople() {
@@ -69,8 +83,10 @@ const swapiService = {
     },
 
     async getPlanet(id) {
-        const url = `planets/${ id }`
+        const url = `planets/${ id }`;
         const planet = await this.getResource(url);
+        const imgLoadStatus = await this.getResource(`planets/${id}.jpg`, {checkIsAvailable: true});
+        planet.imgSrc = imgLoadStatus ? (API_GET_IMG_URL + `planets/${id}.jpg`) : API_PLACEHOLDER_IMG_URL;
         return transformPlanet(planet);
     },
 
