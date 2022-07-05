@@ -4,6 +4,9 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import { CardActionArea } from '@mui/material'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemText from '@mui/material/ListItemText'
 import Loader from '../loader/Loader'
 import swapiService from '../../services/swapiService';
 import {getRandomPlanetId} from '../../utils/utils';
@@ -23,47 +26,42 @@ const RandomPlanet = () => {
 
     useEffect(setRandomPlanet, [ setPlanet ])
 
-    if(loading) {
-        return <Loader/>
-    }
-
-    if(planet.id) {
-        return (
-            <div className="random-planet__container">
-                <Card sx={ { maxWidth: 345 } }>
-                    <CardActionArea>
-                        <CardMedia
-                            component="img"
-                            height="auto"
-                            image={ planet.imgSrc }
-                            alt={ planet.name }
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                { planet.name }
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                <ul className="list-group list-group-flush">
-                                    <li className="list-group-item">
-                                        <span className="term">Population: </span>
-                                        <span>{ planet.population }</span>
-                                    </li>
-                                    <li className="list-group-item">
-                                        <span className="term">Rotation Period: </span>
-                                        <span>{ planet.rotationPeriod }</span>
-                                    </li>
-                                    <li className="list-group-item">
-                                        <span className="term">Diameter: </span>
-                                        <span>{ planet.diameter }</span>
-                                    </li>
-                                </ul>
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
-            </div>
-        )
-    }
+    return (
+        <div className="random-planet__container">
+            { loading ? (
+                <Loader/>
+            ) : planet.id ? (
+                    <div className="random-planet__container">
+                        <Card sx={ { maxWidth: 345 } }>
+                            <CardActionArea>
+                                <CardMedia
+                                    component="img"
+                                    height="auto"
+                                    image={ planet.imgSrc }
+                                    alt={ planet.name }
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="div">
+                                        { planet.name }
+                                    </Typography>
+                                    <List>
+                                        <ListItem disablePadding>
+                                            <ListItemText primary ={`Population: ${ planet.population }`} />
+                                        </ListItem>
+                                        <ListItem disablePadding>
+                                            <ListItemText primary={`Rotation Period: ${ planet.rotationPeriod }`} />
+                                        </ListItem>
+                                        <ListItem disablePadding>
+                                            <ListItemText primary={`Diameter: ${ planet.diameter }`} />
+                                        </ListItem>
+                                    </List>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                    </div>
+            ) : null}
+        </div>
+    )
 }
 
 export default RandomPlanet
