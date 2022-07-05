@@ -9,7 +9,7 @@ import ListItemText from '@mui/material/ListItemText'
 import React from 'react';
 
 const PlanetView = ({planet}) => {
-    return(
+    return (
     <Card sx={ { maxWidth: 345 } }>
         <CardActionArea>
             <CardMedia
