@@ -1,34 +1,22 @@
 import {updateObject} from '../../../utils/utils';
-import swapiService from '../../../services/swapiService';
-import { getRandomPlanetId } from '../../../utils/utils';
 
 const SET_IS_LOADING = "SET_IS_LOADING";
 const SET_ERROR = "SET_ERROR";
 const SET_PLANET = "SET_PLANET";
+export const SET_RERENDER_PERIOD = "SET_RERENDER_PERIOD";
 export const FETCH_RANDOM_PLANET = "FETCH_RANDOM_PLANET";
 
 const initialState = {
     planet: {},
     isLoading: false,
-    isError: false
+    isError: false,
+    rerenderInterval: null
 };
 
 export const setIsLoading = (isLoading) => ({type: SET_IS_LOADING, isLoading});
 export const setError = (error) => ({type: SET_ERROR, error});
 export const setPlanet = (planet) => ({type: SET_PLANET, planet});
-export const setRandomPlanet = () => {
-    return (dispatch) => {
-        dispatch(setIsLoading(true));
-        const id = getRandomPlanetId();
-        swapiService.getPlanet(id).then((planet) => {
-            dispatch(setPlanet(planet));
-            dispatch(setIsLoading(false));
-        }).catch((error) => {
-            dispatch(setIsLoading(false));
-            dispatch(setError(error));
-        })
-    }
-}
+export const setRerenderPeriod = (interval) => ({type: SET_RERENDER_PERIOD, interval});
 
 export const fetchRandomPlanet = () => ({type: FETCH_RANDOM_PLANET});
 
@@ -40,6 +28,9 @@ const randomPlanetReducer = (state=initialState, action) => {
             return updateObject(state, {error: action.error});
         case SET_PLANET:
             return updateObject(state, {planet: action.planet})
+        case SET_RERENDER_PERIOD:
+            console.log(action)
+            return updateObject(state, {rerenderInterval: action.interval})
         default:
             return state;
     }
