@@ -1,4 +1,4 @@
-import {isObjectEmpty} from '../utils/utils'
+import {isObjectEmpty} from '../utils/randomPlanetUtils'
 
 const GET_ALL_PEOPLE_PATH = "people";
 const GET_ALL_PLANETS_PATH = "planets";

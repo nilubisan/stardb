@@ -1,4 +1,4 @@
-import {updateObject} from '../../../utils/utils';
+import {updateObject} from '../../../utils/randomPlanetUtils';
 
 const SET_IS_LOADING = "SET_IS_LOADING";
 const SET_ERROR = "SET_ERROR";
@@ -29,7 +29,6 @@ const randomPlanetReducer = (state=initialState, action) => {
         case SET_PLANET:
             return updateObject(state, {planet: action.planet})
         case SET_RERENDER_PERIOD:
-            console.log(action)
             return updateObject(state, {rerenderInterval: action.interval})
         default:
             return state;

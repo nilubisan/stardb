@@ -1,33 +1,41 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import {IconButton} from '@mui/material'
+import CancelIcon from '@mui/icons-material/Cancel';
 import { connect } from 'react-redux';
 import Select from 'react-select'
 import PlanetDetails from '../planetDetails/PlanetDetails';
 import Loader from '../loader/Loader';
 import ErrorIndicator from '../errorIndicator/ErrorIndicator';
-import { fetchRandomPlanet, setRerenderPeriod } from '../../redux/reducers/randomPlanet/randomPlanetReducer';
+import { fetchRandomPlanet, setRerenderPeriod } from '../../redux/reducers/randomPlanet/randomPlanetReducer'
+import {getRefreshPeriodOptions, transformPeriodToPeriodOption} from "../../utils/randomPlanetUtils";
 import './random-planet.css';
 
-
 const RandomPlanet = ({planet, isLoading, error, fetchRandomPlanet, setRerenderPeriod, rerenderInterval}) => {
+
+    const [planetInterval, setPlanetInterval] = useState(rerenderInterval);
+
     useEffect(() => {
         fetchRandomPlanet();
     }, [fetchRandomPlanet]);
 
     useEffect(() => {
         if(rerenderInterval) {
-            setInterval(fetchRandomPlanet, rerenderInterval)
+            const interval = setInterval(fetchRandomPlanet, rerenderInterval);
+            setPlanetInterval(interval);
+            return () => clearInterval(interval);
         }
-    }, []);
-    console.log(planet);
-    const selectOptions = [
-        {value: 5, label: "5 sec"},
-        {value: 10, label: "10 sec"},
-        {value: 20, label: "20 sec"},
-        {value: 30, label: "30 sec"},
-    ]
+    }, [rerenderInterval]);
+
+    const selectOptions = getRefreshPeriodOptions([3000, 5000, 10000, 20000, 30000]);
 
     const onSelectChange = (selectedOptions) => {
-        setRerenderPeriod(+selectedOptions.value*1000);
+        setRerenderPeriod(selectedOptions.value);
+    }
+
+    const stopPlanetRefresh = () => {
+        if(planetInterval) {
+            clearInterval(planetInterval);
+        }
     }
 
     const loading = (isLoading && !error) ? <Loader/> : null
@@ -39,15 +47,21 @@ const RandomPlanet = ({planet, isLoading, error, fetchRandomPlanet, setRerenderP
             { errorMessage }
             { (!isLoading && !error && planet.id) ? (
                 <div className="random-planet">
-                <div className='select-area'>
-                    <span>
-                        Choose the interval for planet to be randomly shown 
+                <div className='select-random-planet'>
+                    <span className="select-random-planet__title">
+                        Select the refresh interval for planet
                     </span>
-                    <Select 
-                    options={selectOptions}
-                    onChange={onSelectChange}
-                    >
+                    <div className="select-random-planet__control">
+                        <Select
+                            options={selectOptions}
+                            onChange={onSelectChange}
+                            defaultValue={rerenderInterval ? transformPeriodToPeriodOption(rerenderInterval) : null}
+                        >
                         </Select>
+                        <IconButton aria-label="delete" sx={{ color: "#c83d3d" }} onClick={stopPlanetRefresh}>
+                            <CancelIcon />
+                        </IconButton>
+                    </div>
                     </div>
                     <PlanetDetails planet={ planet }/>
                 </div>

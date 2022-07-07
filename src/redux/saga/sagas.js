@@ -1,6 +1,6 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
 import swapiService from "../../services/swapiService";
-import {getRandomPlanetId} from '../../utils/utils';
+import {getRandomPlanetId} from '../../utils/randomPlanetUtils';
 import { setIsLoading, setError, setPlanet} from "../reducers/randomPlanet/randomPlanetReducer"
 import {FETCH_RANDOM_PLANET} from '../reducers/randomPlanet/randomPlanetReducer';
 
