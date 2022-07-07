@@ -2,45 +2,50 @@ import React, { useEffect, useState } from 'react';
 import {IconButton} from '@mui/material'
 import CancelIcon from '@mui/icons-material/Cancel';
 import { connect } from 'react-redux';
+import Card from '../card/Card';
 import Select from 'react-select'
-import PlanetDetails from '../planetDetails/PlanetDetails';
 import Loader from '../loader/Loader';
 import ErrorIndicator from '../errorIndicator/ErrorIndicator';
-import { fetchRandomPlanet, setRerenderPeriod } from '../../redux/reducers/randomPlanet/randomPlanetReducer'
+import { fetchRandomPlanet } from '../../redux/modules/randomPlanet/actions/actions';
 import {getRefreshPeriodOptions, transformPeriodToPeriodOption} from "../../utils/randomPlanetUtils";
 import './random-planet.css';
 
-const RandomPlanet = ({planet, isLoading, error, fetchRandomPlanet, setRerenderPeriod, rerenderInterval}) => {
+const RandomPlanet = ({planet, isLoading, error, fetchRandomPlanet}) => {
 
-    const [planetInterval, setPlanetInterval] = useState(rerenderInterval);
+    const [planetInterval, setPlanetInterval] = useState(null);
+    const [planetIntervalId, setPlanetIntervalId] = useState(null);
 
     useEffect(() => {
         fetchRandomPlanet();
-    }, [fetchRandomPlanet]);
-
+    }, []);
     useEffect(() => {
-        if(rerenderInterval) {
-            const interval = setInterval(fetchRandomPlanet, rerenderInterval);
-            setPlanetInterval(interval);
+        if(planetInterval) {
+            console.log(planetInterval);
+            const interval = setInterval(fetchRandomPlanet, planetInterval);
+            setPlanetIntervalId(interval);
             return () => clearInterval(interval);
         }
-    }, [rerenderInterval]);
+    }, [planetInterval]);
 
     const selectOptions = getRefreshPeriodOptions([3000, 5000, 10000, 20000, 30000]);
-
     const onSelectChange = (selectedOptions) => {
-        setRerenderPeriod(selectedOptions.value);
-    }
-
+        setPlanetInterval(selectedOptions.value);
+    };
     const stopPlanetRefresh = () => {
         if(planetInterval) {
-            clearInterval(planetInterval);
+            clearInterval(+planetIntervalId);
         }
-    }
+    };
 
     const loading = (isLoading && !error) ? <Loader/> : null
     const errorMessage = (error && !isLoading) ? <ErrorIndicator/> : null
-    
+
+    const planetFeaturesNamesList = {
+        "Rotation period": "rotationPeriod",
+        "Population": "population",
+        "Diameter": "diameter"
+    };
+
     return (
         <div className="random-planet__container">
             { loading }
@@ -55,7 +60,7 @@ const RandomPlanet = ({planet, isLoading, error, fetchRandomPlanet, setRerenderP
                         <Select
                             options={selectOptions}
                             onChange={onSelectChange}
-                            defaultValue={rerenderInterval ? transformPeriodToPeriodOption(rerenderInterval) : null}
+                            defaultValue={planetInterval ? transformPeriodToPeriodOption(planetInterval) : null}
                         >
                         </Select>
                         <IconButton aria-label="delete" sx={{ color: "#c83d3d" }} onClick={stopPlanetRefresh}>
@@ -63,7 +68,7 @@ const RandomPlanet = ({planet, isLoading, error, fetchRandomPlanet, setRerenderP
                         </IconButton>
                     </div>
                     </div>
-                    <PlanetDetails planet={ planet }/>
+                    <Card entity={planet} entityFeaturesNamesList={planetFeaturesNamesList} />
                 </div>
            ) : null}
         </div>
@@ -74,13 +79,10 @@ const mapStateToProps = (state) => ({
     planet: state.planet,
     isLoading: state.isLoading,
     error: state.error,
-    rerenderInterval: state.rerenderInterval
 });
 
 const mapDispatchToProps = {
-    fetchRandomPlanet,
-    setRerenderPeriod
+    fetchRandomPlanet
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(RandomPlanet);
