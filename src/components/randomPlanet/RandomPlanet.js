@@ -20,7 +20,6 @@ const RandomPlanet = ({planet, isLoading, error, fetchRandomPlanet}) => {
     }, []);
     useEffect(() => {
         if(planetInterval) {
-            console.log(planetInterval);
             const interval = setInterval(fetchRandomPlanet, planetInterval);
             setPlanetIntervalId(interval);
             return () => clearInterval(interval);
@@ -75,11 +74,13 @@ const RandomPlanet = ({planet, isLoading, error, fetchRandomPlanet}) => {
     );
 }
 
-const mapStateToProps = (state) => ({
-    planet: state.planet,
-    isLoading: state.isLoading,
-    error: state.error,
-});
+const mapStateToProps = (state) => {
+    return {
+    planet: state.randomPlanet.planet,
+    isLoading: state.randomPlanet.isLoading,
+    error: state.randomPlanet.error,
+}
+};
 
 const mapDispatchToProps = {
     fetchRandomPlanet

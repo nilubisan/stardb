@@ -9,7 +9,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
 const CardView = ({ entity, entityFeaturesNamesList, }) => {
-    console.log(entity);
     return (
         <Card sx={ { maxWidth: 345 } }>
             <CardActionArea>

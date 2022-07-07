@@ -8,13 +8,14 @@ const initialState = {
 };
 
 const randomPlanetReducer = (state=initialState, action) => {
+    if(typeof action === "undefined") return state
     switch(action.type) {
         case SET_IS_LOADING:
-            return updateObject(state, {isLoading: action.isLoading});
+            return updateObject(state.randomPlanet, {isLoading: action.isLoading});
         case SET_ERROR:
-            return updateObject(state, {error: action.error});
+            return updateObject(state.randomPlanet, {error: action.error});
         case SET_PLANET:
-            return updateObject(state, {planet: action.planet});
+            return updateObject(state.randomPlanet, {planet: action.planet});
         default:
             return state;
     }
