@@ -4,7 +4,7 @@ import {setPersons, setPage} from "../actions/actions";
 import {put, call} from "redux-saga/effects"
 
 
-function* fetchPersonsByPageNumber(action) {
+function* fetchPersonsByPageNumberWorker(action) {
     try {
         yield put(setPage(action.pageNumber));
         yield put(setIsLoading(true));
