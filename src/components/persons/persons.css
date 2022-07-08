@@ -1,0 +1,19 @@
+.persons__container {
+    margin-top: 50px;
+    width: 100%;
+}
+
+.persons {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgba(130, 130, 130, 0.3);
+    margin: 0 auto;
+    max-width: 1200px;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.pagination {
+    background-color: white;
+}

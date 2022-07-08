@@ -8,9 +8,9 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
-const CardView = ({ entity, entityFeaturesNamesList, }) => {
+const CardView = ({ entity, entityFeaturesNamesList, cardStyles}) => {
     return (
-        <Card sx={ { maxWidth: 345 } }>
+        <Card sx={ cardStyles }>
             <CardActionArea>
                 <CardMedia
                     component="img"

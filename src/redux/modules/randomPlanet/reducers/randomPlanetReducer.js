@@ -1,5 +1,6 @@
-import { updateObject } from '../../../../utils/randomPlanetUtils';
-import {SET_IS_LOADING, SET_ERROR, SET_PLANET} from '../actions/actionTypes';
+import { updateObject } from '../../../../utils/commonUtils';
+import { SET_PLANET} from '../actions/actionTypes';
+import {SET_IS_LOADING, SET_ERROR} from "../../common/actions/actionTypes";
 
 const initialState = {
     planet: {},

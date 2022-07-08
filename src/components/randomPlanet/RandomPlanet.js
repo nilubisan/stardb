@@ -72,7 +72,7 @@ const RandomPlanet = ({planet, isLoading, error, fetchRandomPlanet}) => {
            ) : null}
         </div>
     );
-}
+};
 
 const mapStateToProps = (state) => {
     return {

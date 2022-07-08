@@ -1,0 +1,3 @@
+export const FETCH_PERSONS_BY_PAGE_NUMBER = "FETCH_PERSONS_BY_PAGE_NUMBER";
+export const SET_PAGE = "SET_PAGE";
+export const SET_PERSONS = "SET_PERSONS";

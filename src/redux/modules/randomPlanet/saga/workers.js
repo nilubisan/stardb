@@ -1,6 +1,7 @@
 import { getRandomPlanetId } from '../../../../utils/randomPlanetUtils'
 import swapiService from '../../../../services/swapiService'
-import {setIsLoading, setPlanet, setError} from '../actions/actions';
+import { setPlanet } from '../actions/actions';
+import {setIsLoading, setError} from '../../common/actions/actions'
 import {call, put} from 'redux-saga/effects';
 
 function* fetchRandomPlanet() {
@@ -13,6 +14,6 @@ function* fetchRandomPlanet() {
     } catch(e) {
         yield put(setError(e));
     }
-};
+}
 
 export default fetchRandomPlanet;
