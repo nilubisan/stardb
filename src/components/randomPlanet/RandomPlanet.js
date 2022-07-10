@@ -3,24 +3,24 @@ import {IconButton} from '@mui/material'
 import CancelIcon from '@mui/icons-material/Cancel';
 import { connect } from 'react-redux';
 import Card from '../card/Card';
-import Select from 'react-select'
+import Select from 'react-select';
 import Loader from '../loader/Loader';
 import ErrorIndicator from '../errorIndicator/ErrorIndicator';
-import { fetchRandomPlanet } from '../../redux/modules/randomPlanet/actions/actions';
+import { fetchRandomPlanetRequest } from '../../redux/modules/randomPlanet/actions/actions';
 import {getRefreshPeriodOptions, transformPeriodToPeriodOption} from "../../utils/randomPlanetUtils";
 import './random-planet.css';
 
-const RandomPlanet = ({planet, isLoading, error, fetchRandomPlanet}) => {
+const RandomPlanet = ({planet, loading, error, fetchRandomPlanetRequest}) => {
 
     const [planetInterval, setPlanetInterval] = useState(null);
     const [planetIntervalId, setPlanetIntervalId] = useState(null);
 
     useEffect(() => {
-        fetchRandomPlanet();
+        fetchRandomPlanetRequest();
     }, []);
     useEffect(() => {
         if(planetInterval) {
-            const interval = setInterval(fetchRandomPlanet, planetInterval);
+            const interval = setInterval(fetchRandomPlanetRequest, planetInterval);
             setPlanetIntervalId(interval);
             return () => clearInterval(interval);
         }
@@ -36,8 +36,8 @@ const RandomPlanet = ({planet, isLoading, error, fetchRandomPlanet}) => {
         }
     };
 
-    const loading = (isLoading && !error) ? <Loader/> : null
-    const errorMessage = (error && !isLoading) ? <ErrorIndicator/> : null
+    const loader = (loading && !error) ? <Loader/> : null
+    const errorMessage = (error && !loading) ? <ErrorIndicator/> : null
 
     const planetFeaturesNamesList = {
         "Rotation period": "rotationPeriod",
@@ -47,9 +47,9 @@ const RandomPlanet = ({planet, isLoading, error, fetchRandomPlanet}) => {
 
     return (
         <div className="random-planet__container">
-            { loading }
+            { loader }
             { errorMessage }
-            { (!isLoading && !error && planet.id) ? (
+            { (!loading && !error && planet.id) ? (
                 <div className="random-planet">
                 <div className='select-random-planet'>
                     <span className="select-random-planet__title">
@@ -77,13 +77,13 @@ const RandomPlanet = ({planet, isLoading, error, fetchRandomPlanet}) => {
 const mapStateToProps = (state) => {
     return {
     planet: state.randomPlanet.planet,
-    isLoading: state.randomPlanet.isLoading,
+    loading: state.randomPlanet.loading,
     error: state.randomPlanet.error,
 }
 };
 
 const mapDispatchToProps = {
-    fetchRandomPlanet
+    fetchRandomPlanetRequest
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RandomPlanet);

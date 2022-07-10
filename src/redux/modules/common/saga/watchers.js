@@ -1,11 +1,11 @@
-import { watchFetchRandomPlanet } from '../../randomPlanet/saga/watchers'
-import {watchFetchPersonsByPageNumber} from '../../persons/saga/watchers';
+import { fetchRandomPlanetWatcher } from '../../randomPlanet/saga/watchers'
+import { fetchPersonsByPageNumberWatcher } from '../../persons/saga/watchers';
 import {all} from 'redux-saga/effects'
 
 function* rootSaga() {
     yield all([
-        watchFetchRandomPlanet(),
-        watchFetchPersonsByPageNumber()
+        fetchRandomPlanetWatcher(),
+        fetchPersonsByPageNumberWatcher()
     ])
 }
 

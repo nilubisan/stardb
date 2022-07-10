@@ -2,25 +2,26 @@ import React, { useEffect } from 'react'
 import './persons.css'
 import Loader from '../loader/Loader'
 import ErrorIndicator from '../errorIndicator/ErrorIndicator'
-import { fetchPersonsByPageNumber } from '../../redux/modules/persons/actions/actions'
+import { fetchPersonsByPageNumberRequest } from '../../redux/modules/persons/actions/actions'
 import CardView from '../card/Card'
 import { connect } from 'react-redux'
 import Paginator from '../paginator/Paginator'
 
 const Persons = ({
                      persons,
-                     isLoading,
+                     loading,
                      error,
-                     currentPage,
+                     currentPageNumber,
                      pageCount,
-                     fetchPersonsByPageNumber
+                     fetchPersonsByPageNumberRequest
                  }) => {
-    const loading = (isLoading && !error) ? <Loader/> : null
-    const errorMessage = (error && !isLoading) ? <ErrorIndicator/> : null
+    const loader = (loading && !error) ? <Loader/> : null
+    const errorMessage = (error && !loading) ? <ErrorIndicator/> : null
 
     useEffect(() => {
-     fetchPersonsByPageNumber(currentPage)
-    }, [currentPage])
+        fetchPersonsByPageNumberRequest(currentPageNumber)
+    }, [currentPageNumber]);
+
     const personFeatureNamesList = {
         'Height': 'height',
         'Mass': 'mass',
@@ -30,14 +31,14 @@ const Persons = ({
     }
 
     const handlePageClick = (pageNumber) => {
-        fetchPersonsByPageNumber(pageNumber.selected + 1)
+        fetchPersonsByPageNumberRequest(pageNumber.selected + 1)
     }
 
     return (
         <div className="persons__container">
-            { loading }
+            { loader }
             { errorMessage }
-            { (!isLoading && !error && persons) ? (
+            { (!loading && !error && persons) ? (
                 <>
                     <div className="persons">
                         {
@@ -48,7 +49,7 @@ const Persons = ({
                             })
                         }
                     </div>
-                    <Paginator handlePageClick={handlePageClick} pageCount={Math.ceil(pageCount / 10)} activePageNumber={currentPage}/>
+                    <Paginator handlePageClick={handlePageClick} pageCount={Math.ceil(pageCount / 10)} activePageNumber={currentPageNumber}/>
                 </>
             ) : null }
         </div>
@@ -60,12 +61,12 @@ const mapStateToProps = (state) => {
     persons: state.persons.persons,
     isLoading: state.persons.isLoading,
     error: state.persons.error,
-    currentPage: state.persons.currentPage,
+    currentPageNumber: state.persons.currentPageNumber,
     pageCount: state.persons.pageCount
 }}
 
 const mapDispatchToProps = {
-    fetchPersonsByPageNumber
+    fetchPersonsByPageNumberRequest
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Persons)

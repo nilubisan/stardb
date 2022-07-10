@@ -1,19 +1,17 @@
 import { getRandomPlanetId } from '../../../../utils/randomPlanetUtils'
 import swapiService from '../../../../services/swapiService'
-import { setPlanet } from '../actions/actions';
-import {setIsLoading, setError} from '../../common/actions/actions'
+import { loadPlanetRequest, loadPlanetSuccess, loadPlanetFailure } from '../actions/actions';
 import {call, put} from 'redux-saga/effects';
 
-function* fetchRandomPlanet() {
+function* fetchRandomPlanetWorker() {
     try {
         const id = getRandomPlanetId();
-        yield put(setIsLoading(true));
+        yield put(loadPlanetRequest());
         const planet = yield call(swapiService.getPlanet.bind(swapiService), id);
-        yield put(setIsLoading(false));
-        yield put(setPlanet(planet));
-    } catch(e) {
-        yield put(setError(e));
+        yield put(loadPlanetSuccess(planet));
+    } catch(error) {
+        yield put(loadPlanetFailure(error));
     }
 }
 
-export default fetchRandomPlanet;
+export default fetchRandomPlanetWorker;

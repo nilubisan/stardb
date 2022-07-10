@@ -1,22 +1,21 @@
 import { updateObject } from '../../../../utils/commonUtils';
-import { SET_PLANET} from '../actions/actionTypes';
-import {SET_IS_LOADING, SET_ERROR} from "../../common/actions/actionTypes";
+import { LOAD_PLANET_REQUEST, LOAD_PLANET_SUCCESS, LOAD_PLANET_FAILURE } from '../actions/actionTypes';
 
 const initialState = {
     planet: {},
-    isLoading: false,
-    isError: false
+    loading: false,
+    error: null
 };
 
 const randomPlanetReducer = (state=initialState, action) => {
     if(typeof action === "undefined") return state
     switch(action.type) {
-        case SET_IS_LOADING:
-            return updateObject(state.randomPlanet, {isLoading: action.isLoading});
-        case SET_ERROR:
-            return updateObject(state.randomPlanet, {error: action.error});
-        case SET_PLANET:
-            return updateObject(state.randomPlanet, {planet: action.planet});
+        case LOAD_PLANET_REQUEST:
+            return updateObject(state.randomPlanet, {loading: true});
+        case LOAD_PLANET_FAILURE:
+            return updateObject(state.randomPlanet, {loading: false, error: action.error});
+        case LOAD_PLANET_SUCCESS:
+            return updateObject(state.randomPlanet, {loading: false, planet: action.planet});
         default:
             return state;
     }

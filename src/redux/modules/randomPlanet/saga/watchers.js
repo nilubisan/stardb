@@ -1,7 +1,7 @@
-import { FETCH_RANDOM_PLANET } from '../actions/actionTypes';
-import fetchRandomPlanet from '../saga/workers';
-import {takeEvery} from 'redux-saga/effects';
+import { FETCH_RANDOM_PLANET_REQUEST } from '../actions/actionTypes';
+import fetchRandomPlanetWorker from '../saga/workers';
+import {takeLatest} from 'redux-saga/effects';
 
-export function* watchFetchRandomPlanet() {
-    yield takeEvery(FETCH_RANDOM_PLANET, fetchRandomPlanet);
+export function* fetchRandomPlanetWatcher() {
+    yield takeLatest(FETCH_RANDOM_PLANET_REQUEST, fetchRandomPlanetWorker);
 }

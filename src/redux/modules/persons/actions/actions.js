@@ -1,6 +1,7 @@
-import {SET_PAGE, SET_PERSONS, FETCH_PERSONS_BY_PAGE_NUMBER} from './actionTypes';
+import {CHANGE_CURRENT_PAGE_NUMBER, LOAD_PERSONS_REQUEST, LOAD_PERSONS_SUCCESS, LOAD_PERSONS_FAILURE, FETCH_PERSONS_BY_PAGE_NUMBER_REQUEST} from './actionTypes';
 
-export const setPage = (page) => ({type: SET_PAGE, page});
-export const fetchPersonsByPageNumberSuccess = (result) => ({type: SET_PERSONS, result});
-// export const fetchPersonsByPageNumberFail = (result) => ({type: SET_PERSONS, result});
-export const fetchPersonsByPageNumberRequest = (pageNumber) => ({type: FETCH_PERSONS_BY_PAGE_NUMBER, pageNumber});
+export const changeCurrentPageNumber = (pageNumber) => ({type: CHANGE_CURRENT_PAGE_NUMBER, pageNumber});
+export const loadPersonsRequest = () => ({type: LOAD_PERSONS_REQUEST});
+export const loadPersonsSuccess = (result) => ({type: LOAD_PERSONS_SUCCESS, result});
+export const loadPersonsFailure = (error) => ({type: LOAD_PERSONS_FAILURE, error});
+export const fetchPersonsByPageNumberRequest = (pageNumber) => ({type: FETCH_PERSONS_BY_PAGE_NUMBER_REQUEST, pageNumber});

@@ -1,19 +1,17 @@
 import swapiService from '../../../../services/swapiService';
-import {setIsLoading, setError} from '../../common/actions/actions'
-import {setPersons, setPage} from "../actions/actions";
-import {put, call} from "redux-saga/effects"
+import {changeCurrentPageNumber, loadPersonsRequest, loadPersonsSuccess, loadPersonsFailure, } from '../actions/actions';
+import {put, call} from "redux-saga/effects";
 
 
 function* fetchPersonsByPageNumberWorker(action) {
     try {
-        yield put(setPage(action.pageNumber));
-        yield put(setIsLoading(true));
+        yield put(changeCurrentPageNumber(action.pageNumber));
+        yield put(loadPersonsRequest());
         const result = yield call(swapiService.getPersonsByPageNumber.bind(swapiService), action.pageNumber);
-        yield put(setIsLoading(false));
-        yield put(setPersons(result));
-    } catch(e) {
-        yield put(setError(e));
+        yield put(loadPersonsSuccess(result));
+    } catch(error) {
+        yield put(loadPersonsFailure(error));
     }
 };
 
-export default fetchPersonsByPageNumber;
+export default fetchPersonsByPageNumberWorker;

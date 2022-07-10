@@ -1,6 +1,6 @@
-import {SET_PLANET, FETCH_RANDOM_PLANET} from './actionTypes';
-import {SET_IS_LOADING, SET_ERROR} from '../../common/actions/actionTypes'
+import {LOAD_PLANET_REQUEST, LOAD_PLANET_SUCCESS, LOAD_PLANET_FAILURE, FETCH_RANDOM_PLANET_REQUEST} from './actionTypes';
 
-
-export const setPlanet = (planet) => ({ type: SET_PLANET, planet });
-export const fetchRandomPlanet = () => ({ type: FETCH_RANDOM_PLANET });
+export const loadPlanetRequest = () => ({ type: LOAD_PLANET_REQUEST});
+export const loadPlanetSuccess = (planet) => ({ type: LOAD_PLANET_SUCCESS, planet });
+export const loadPlanetFailure = (error) => ({ type: LOAD_PLANET_FAILURE, error });
+export const fetchRandomPlanetRequest = () => ({ type: FETCH_RANDOM_PLANET_REQUEST });
