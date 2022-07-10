@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import {IconButton} from '@mui/material'
 import CancelIcon from '@mui/icons-material/Cancel';
 import { connect } from 'react-redux';
-import Card from '../card/Card';
+import Card from '../../components/card';
 import Select from 'react-select';
-import Loader from '../loader/Loader';
-import ErrorIndicator from '../errorIndicator/ErrorIndicator';
+import Loader from '../../components/loader';
+import ErrorIndicator from '../../components/errorIndicator';
 import { fetchRandomPlanetRequest } from '../../redux/modules/randomPlanet/actions/actions';
 import {getRefreshPeriodOptions, transformPeriodToPeriodOption} from "../../utils/randomPlanetUtils";
 import './random-planet.css';

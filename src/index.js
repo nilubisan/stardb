@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import App from './components/app/App';
+import App from './components/app';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 const rootElement = document.querySelector("#root");

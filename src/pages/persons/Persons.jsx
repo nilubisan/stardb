@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import './persons.css'
-import Loader from '../loader/Loader'
-import ErrorIndicator from '../errorIndicator/ErrorIndicator'
+import Loader from '../../components/loader'
+import ErrorIndicator from '../../components/errorIndicator'
 import { fetchPersonsByPageNumberRequest } from '../../redux/modules/persons/actions/actions'
-import CardView from '../card/Card'
+import CardView from '../../components/card';
 import { connect } from 'react-redux'
-import Paginator from '../paginator/Paginator'
+import Paginator from '../../components/paginator'
 
 const Persons = ({
                      persons,
@@ -31,7 +31,7 @@ const Persons = ({
     }
 
     const handlePageClick = (pageNumber) => {
-        fetchPersonsByPageNumberRequest(pageNumber.selected + 1)
+        fetchPersonsByPageNumberRequest(pageNumber.selected + 1);
     }
 
     return (
