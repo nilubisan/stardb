@@ -1,6 +1,7 @@
 .persons__container {
     margin-top: 50px;
     width: 100%;
+    text-align: center;
 }
 
 .persons {

@@ -59,7 +59,7 @@ const Persons = ({
 const mapStateToProps = (state) => {
     return {
     persons: state.persons.persons,
-    isLoading: state.persons.isLoading,
+    loading: state.persons.loading,
     error: state.persons.error,
     currentPageNumber: state.persons.currentPageNumber,
     pageCount: state.persons.pageCount

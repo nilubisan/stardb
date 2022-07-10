@@ -3,7 +3,6 @@ import {isObjectEmpty} from '../utils/commonUtils'
 import { transformStarship, transformPlanet, transformPerson } from '../utils/swapiServiceUtils'
 
 // CONSTANTS
-const GET_ALL_PEOPLE_PATH = "people";
 const GET_ALL_PLANETS_PATH = "planets";
 const GET_ALL_STARSHIPS = "starships";
 const API_BASE_URL = 'https://swapi.dev/api/';
@@ -28,21 +27,22 @@ const swapiService = {
         }
     },
 
-    _getValidImageSrc(params) {
+    async _getValidImageSrc(params) {
         const {entity, id} = params;
-        const imgLoadStatus = this.getResource(`${entity}/${id}.jpg`, {checkIsAvailable: true});
+        const imgLoadStatus = await this.getResource(`${entity}/${id}.jpg`, {checkIsAvailable: true});;
         return imgLoadStatus ? (API_GET_IMG_URL + `${entity}/${id}.jpg`) : API_PLACEHOLDER_IMG_URL;
+        
     },
 
     async getPersonsByPageNumber(pageNumber) {
         const res = await this.getResource(`people/?page=${pageNumber}`);
+        const persons = await Promise.all(res.results.map(async (person) => {
+            const transformedPerson = transformPerson(person);
+            transformedPerson.imgSrc = await this._getValidImageSrc({entity:"characters", id: transformedPerson.id});
+            return transformedPerson;
+        }))
         return {
-            pageCount: res.count,
-            persons: res.results.map((person) => {
-                const transformedPerson = transformPerson(person);
-                transformedPerson.imgSrc = this._getValidImageSrc({entity:"characters", id: transformedPerson.id});
-                return transformedPerson;
-            })
+            pageCount: res.count, persons
         }
     },
 
@@ -60,7 +60,7 @@ const swapiService = {
     async getPlanet(id) {
         const url = `planets/${ id }`;
         const planet = await this.getResource(url);
-        planet.imgSrc = this._getValidImageSrc({entity: "planets", id})
+        planet.imgSrc = await this._getValidImageSrc({entity: "planets", id});
         return transformPlanet(planet);
     },
 

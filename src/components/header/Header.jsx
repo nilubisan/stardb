@@ -9,12 +9,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
+import {NavLink} from 'react-router-dom'
 import Logo from './logo.png';
 import "./header.css";
 
 const ResponsiveAppBar = () => {
 
-const pages = ['People', 'Planets', 'Starships'];
+const pages = ['persons', 'planets', 'starships'];
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
@@ -86,7 +87,7 @@ const pages = ['People', 'Planets', 'Starships'];
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography color='#FFDD00' textAlign="center">{page}</Typography>
+                  <Typography textAlign="center"><NavLink className="header__navlink" to={`/${page}`}>{page.toUpperCase()}</NavLink></Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -114,9 +115,9 @@ const pages = ['People', 'Planets', 'Starships'];
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: '#FFDD00', display: 'block' }}
+                sx={{ my: 2, display: 'block' }}
               >
-                {page}
+                <NavLink className='header__navlink' to={`/${page}`}>{page.toUpperCase()}</NavLink>
               </Button>
             ))}
           </Box>
