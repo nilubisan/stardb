@@ -20,11 +20,14 @@ const RandomPlanet = ({planet, loading, error, fetchRandomPlanetRequest}) => {
     }, []);
     useEffect(() => {
         if(planetInterval) {
-            const interval = setInterval(fetchRandomPlanetRequest, planetInterval);
+            const interval = setInterval(() => {
+                console.log(loading)
+                if(!loading) fetchRandomPlanetRequest()
+            }, planetInterval);
             setPlanetIntervalId(interval);
             return () => clearInterval(interval);
         }
-    }, [planetInterval]);
+    }, [loading, planetInterval]);
 
     const selectOptions = getRefreshPeriodOptions([3000, 5000, 10000, 20000, 30000]);
     const onSelectChange = (selectedOptions) => {
