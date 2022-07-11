@@ -12,6 +12,6 @@ function* fetchRandomPlanetWorker() {
     } catch(error) {
         yield put(loadPlanetFailure(error));
     }
-}
+};
 
 export default fetchRandomPlanetWorker;

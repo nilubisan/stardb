@@ -18,13 +18,10 @@ export const transformStarship = (starship) => {
     return {
         id: extractId(starship),
         name: starship.name,
-        model: starship.model,
-        manufacturer: starship.manufacturer,
-        costInCredits: starship.costInCredits,
-        length: starship.length,
         crew: starship.crew,
+        maxAtmospheringSpeed: starship.max_atmosphering_speed,
+        cargoCapacity: starship.cargo_capacity,
         passengers: starship.passengers,
-        cargoCapacity: starship.cargoCapacity
     }
 };
 

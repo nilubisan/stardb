@@ -46,6 +46,18 @@ const swapiService = {
         }
     },
 
+    async getStarshipsByPageNumber(pageNumber) {
+        const res = await this.getResource(`starships/?page=${pageNumber}`);
+        const starships = await Promise.all(res.results.map(async (starship) => {
+            const transformedStarship = transformStarship(starship);
+            transformedStarship.imgSrc = await this._getValidImageSrc({entity:"starships", id: transformedStarship.id});
+            return transformedStarship;
+        }))
+        return {
+            pageCount: res.count, starships
+        }
+    },
+
     async getPerson(id) {
         const url = `people/${ id }`;
         const person = await this.getResource(url);
