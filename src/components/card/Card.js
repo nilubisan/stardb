@@ -14,7 +14,8 @@ const CardView = ({ entity, entityFeaturesNamesList, cardStyles}) => {
             <CardActionArea>
                 <CardMedia
                     component="img"
-                    height="auto"
+                    width="200"
+                    height="200"
                     image={ entity.imgSrc }
                     alt={ entity.name }
                 />

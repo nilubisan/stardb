@@ -29,7 +29,7 @@ const swapiService = {
 
     async _getValidImageSrc(params) {
         const {entity, id} = params;
-        const imgLoadStatus = await this.getResource(`${entity}/${id}.jpg`, {checkIsAvailable: true});;
+        const imgLoadStatus = await this.getResource(`${entity}/${id}.jpg`, {checkIsAvailable: true});
         return imgLoadStatus ? (API_GET_IMG_URL + `${entity}/${id}.jpg`) : API_PLACEHOLDER_IMG_URL;
         
     },
@@ -55,6 +55,18 @@ const swapiService = {
         }))
         return {
             pageCount: res.count, starships
+        }
+    },
+
+    async getPlanetsByPageNumber(pageNumber) {
+        const res = await this.getResource(`planets/?page=${pageNumber}`);
+        const planets = await Promise.all(res.results.map(async (planet) => {
+            const transformedPlanet = transformPlanet(planet);
+            transformedPlanet.imgSrc = await this._getValidImageSrc({entity:"planets", id: transformedPlanet.id});
+            return transformedPlanet;
+        }))
+        return {
+            pageCount: res.count, planets
         }
     },
 

@@ -1,0 +1,22 @@
+import swapiService from '../../../../services/swapiService'
+import {
+    changeCurrentPlanetsPageNumber,
+    loadPlanetsFailure,
+    loadPlanetsRequest,
+    loadPlanetsSuccess,
+} from '../actions/actions'
+import { call, put } from 'redux-saga/effects'
+
+
+function* fetchPlanetsByPageNumberWorker(action) {
+    try {
+        yield put(changeCurrentPlanetsPageNumber(action.pageNumber))
+        yield put(loadPlanetsRequest())
+        const result = yield call(swapiService.getPlanetsByPageNumber.bind(swapiService), action.pageNumber)
+        yield put(loadPlanetsSuccess(result))
+    } catch (error) {
+        yield put(loadPlanetsFailure(error))
+    }
+};
+
+export default fetchPlanetsByPageNumberWorker
