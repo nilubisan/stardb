@@ -22,13 +22,6 @@ const Starships = ({
         fetchStarshipsByPageNumberRequest(currentPageNumber);
     }, [currentPageNumber]);
 
-    const starshipsFeatureNamesList = {
-        'Crew': 'crew',
-        'Max atmosphering speed': 'maxAtmospheringSpeed',
-        'Cargo capacity': 'cargoCapacity',
-        'Passengers': 'passengers',
-    }
-
     const handlePageClick = (pageNumber) => {
         fetchStarshipsByPageNumberRequest(pageNumber.selected + 1);
     }
@@ -43,7 +36,6 @@ const Starships = ({
                         {
                             starships.map((starship) => {
                                 return <CardView key={ starship.name } entity={ starship }
-                                                 entityFeaturesNamesList={ starshipsFeatureNamesList }
                                                  cardStyles={ { maxWidth: 200, margin: 2 } }/>
                             })
                         }

@@ -7,8 +7,12 @@ import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import {transformEntityToUniqueFeatures} from '../../utils/cardUtils';
 
-const CardView = ({ entity, entityFeaturesNamesList, cardStyles}) => {
+const CardView = ({ entity, cardStyles}) => {
+
+    const entityUniqueFeatures = transformEntityToUniqueFeatures(entity);
+
     return (
         <Card sx={ cardStyles }>
             <CardActionArea>
@@ -25,10 +29,10 @@ const CardView = ({ entity, entityFeaturesNamesList, cardStyles}) => {
                     </Typography>
                     <List>
                         {
-                            Object.keys(entityFeaturesNamesList).map((prop) => {
+                            Object.keys(entityUniqueFeatures).map((property) => {
                                 return (
-                                    <ListItem key={prop} disablePadding>
-                                        <ListItemText primary={ `${prop}: ${ entity[entityFeaturesNamesList[prop]] }` }/>
+                                    <ListItem key={property} disablePadding>
+                                        <ListItemText primary={ `${property}: ${ entityUniqueFeatures[property] }` }/>
                                     </ListItem>
                                 );
                             })

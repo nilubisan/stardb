@@ -84,8 +84,9 @@ const swapiService = {
     async getPlanet(id) {
         const url = `planets/${ id }`;
         const planet = await this.getResource(url);
-        planet.imgSrc = await this._getValidImageSrc({entity: "planets", id});
-        return transformPlanet(planet);
+        const transformedPlanet = transformPlanet(planet);
+        transformedPlanet.imgSrc = await this._getValidImageSrc({entity: "planets", id});
+        return transformedPlanet;
     },
 
 

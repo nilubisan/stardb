@@ -39,12 +39,6 @@ const RandomPlanet = ({planet, loading, error, fetchRandomPlanetRequest}) => {
     const loader = (loading && !error) ? <Loader/> : null
     const errorMessage = (error && !loading) ? <ErrorIndicator/> : null
 
-    const planetFeaturesNamesList = {
-        "Rotation period": "rotationPeriod",
-        "Population": "population",
-        "Diameter": "diameter"
-    };
-
     return (
         <div className="random-planet__container">
             { loader }
@@ -67,7 +61,7 @@ const RandomPlanet = ({planet, loading, error, fetchRandomPlanetRequest}) => {
                         </IconButton>
                     </div>
                     </div>
-                    <Card entity={planet} entityFeaturesNamesList={planetFeaturesNamesList} />
+                    <Card entity={planet}  cardStyles={ { maxWidth: 200, margin: 2 } }/>
                 </div>
            ) : null}
         </div>

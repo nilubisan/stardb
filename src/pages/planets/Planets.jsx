@@ -22,15 +22,9 @@ const Planets = ({
         fetchPlanetsByPageNumberRequest(currentPageNumber)
     }, [currentPageNumber]);
 
-    const planetFeaturesNamesList = {
-        "Rotation period": "rotationPeriod",
-        "Population": "population",
-        "Diameter": "diameter"
-    };
-
     const handlePageClick = (pageNumber) => {
         fetchPlanetsByPageNumberRequest(pageNumber.selected + 1);
-    }
+    };
 
     return (
         <div className="planets__container">
@@ -42,7 +36,6 @@ const Planets = ({
                         {
                             planets.map((planet) => {
                                 return <CardView key={ planet.name } entity={ planet }
-                                                 entityFeaturesNamesList={ planetFeaturesNamesList }
                                                  cardStyles={ { maxWidth: 200, margin: 2 } }/>
                             })
                         }

@@ -22,14 +22,6 @@ const Persons = ({
         fetchPersonsByPageNumberRequest(currentPageNumber)
     }, [currentPageNumber]);
 
-    const personFeatureNamesList = {
-        'Height': 'height',
-        'Mass': 'mass',
-        'Gender': 'gender',
-        'Birth year': 'birthYear',
-        'Eye color': 'eyeColor'
-    }
-
     const handlePageClick = (pageNumber) => {
         fetchPersonsByPageNumberRequest(pageNumber.selected + 1);
     }
@@ -44,7 +36,6 @@ const Persons = ({
                         {
                             persons.map((person) => {
                                 return <CardView key={ person.name } entity={ person }
-                                                 entityFeaturesNamesList={ personFeatureNamesList }
                                                  cardStyles={ { maxWidth: 200, margin: 2 } }/>
                             })
                         }

@@ -7,10 +7,9 @@ export const transformPlanet = (planet) => {
     return {
         id: extractId(planet),
         name: planet.name,
-        imgSrc: planet.imgSrc,
-        population: planet.population,
-        rotationPeriod: planet.rotation_period,
-        diameter: planet.diameter
+        "Population": planet.population,
+        "Rotation period": planet.rotation_period,
+        "Diameter": planet.diameter
     }
 };
 
@@ -18,10 +17,10 @@ export const transformStarship = (starship) => {
     return {
         id: extractId(starship),
         name: starship.name,
-        crew: starship.crew,
-        maxAtmospheringSpeed: starship.max_atmosphering_speed,
-        cargoCapacity: starship.cargo_capacity,
-        passengers: starship.passengers,
+        "Crew": starship.crew,
+        "Max atmosphering speed": starship.max_atmosphering_speed,
+        "Cargo capacity": starship.cargo_capacity,
+        "Passengers": starship.passengers,
     }
 };
 
@@ -29,10 +28,10 @@ export const transformPerson = (person) => {
     return {
         id: extractId(person),
         name: person.name,
-        height: person.height,
-        mass: person.mass,
-        gender: person.gender,
-        birthYear: person.birth_year,
-        eyeColor: person.eye_color
+        "Height": person.height,
+        "Mass": person.mass,
+        "Gender": person.gender,
+        "Birth Year": person.birth_year,
+        "Eye Color": person.eye_color
     }
 };
