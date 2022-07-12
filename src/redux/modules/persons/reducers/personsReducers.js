@@ -7,6 +7,7 @@ import {
 import { updateObject } from '../../../../utils/commonUtils'
 
 const initialState = {
+    promoPlanet: null,
     currentPageNumber: 1,
     pageCount: null,
     persons: null,

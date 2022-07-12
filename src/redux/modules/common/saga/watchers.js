@@ -1,7 +1,7 @@
-import { fetchRandomPlanetWatcher } from '../../randomPlanet/saga/watchers';
+import { fetchRandomPlanetWatcher } from '../../promo/saga/promoWatcher';
 import { fetchPersonsByPageNumberWatcher } from '../../persons/saga/watchers';
 import { fetchStarshipsByPageNumberWatcher} from '../../starships/saga/watchers';
-import { fetchPlanetsByPageNumberWatcher} from '../../planets/saga/watchers';
+import { fetchPlanetsByPageNumberWatcher} from '../../planet/saga/watchers';
 import {all} from 'redux-saga/effects'
 
 function* rootSaga() {

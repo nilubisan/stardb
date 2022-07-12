@@ -70,18 +70,23 @@ const swapiService = {
         }
     },
 
-    async getPerson(id) {
+    async getPersonById(id) {
         const url = `people/${ id }`;
         const person = await this.getResource(url);
-        return transformPerson(person);
+        const transformedPerson = transformPerson(person);
+        transformedPerson.imgSrc = await this._getValidImageSrc({entity:"persons", id: transformedPerson.id});
+        return transformedPerson;
     },
 
-    async getAllPlanets() {
-        const res = await this.getResource(GET_ALL_PLANETS_PATH);
-        return res.results.map(transformPlanet);
+    async getStarshipById(id) {
+        const url = `starships/${ id }`;
+        const starship = await this.getResource(url);
+        const transformedStarship = transformStarship(starship);
+        transformedStarship.imgSrc = await this._getValidImageSrc({entity:"starships", id: transformedStarship.id});
+        return transformedStarship;
     },
 
-    async getPlanet(id) {
+    async getPlanetById(id) {
         const url = `planets/${ id }`;
         const planet = await this.getResource(url);
         const transformedPlanet = transformPlanet(planet);
@@ -89,17 +94,6 @@ const swapiService = {
         return transformedPlanet;
     },
 
-
-    async getAllStarships() {
-        const res = await this.getResource(GET_ALL_STARSHIPS);
-        return res.results.map(transformStarship);
-    },
-
-    async getStarship(id) {
-        const url = `starships/${ id }`;
-        const starship = await this.getResource(url);
-        return transformStarship(starship);
-    },
 };
 
 export default swapiService;

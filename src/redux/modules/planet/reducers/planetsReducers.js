@@ -2,6 +2,7 @@ import { CHANGE_CURRENT_PLANETS_PAGE_NUMBER, LOAD_PLANETS_REQUEST, LOAD_PLANETS_
 import { updateObject } from '../../../../utils/commonUtils';
 
 const initialState = {
+    promoPlanet: null,
     currentPageNumber: 1,
     pageCount: null,
     planets: null,

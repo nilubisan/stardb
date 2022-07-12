@@ -2,6 +2,7 @@ import { CHANGE_CURRENT_STARSHIPS_PAGE_NUMBER, LOAD_STARSHIPS_REQUEST, LOAD_STAR
 import { updateObject } from '../../../../utils/commonUtils';
 
 const initialState = {
+    promoStarship: null,
     currentPageNumber: 1,
     pageCount: null,
     starships: null,

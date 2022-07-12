@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
-import RandomPlanet from "../../pages/randomPlanet";
+import Promo from "../../pages/promo";
 import Persons from '../../pages/persons'
 import Starships from '../../pages/starships';
 import Planets from '../../pages/planets';
@@ -14,7 +14,7 @@ const App = () => {
       <div className="main">
         <Header />
         <Routes>
-          <Route path="/" element={<RandomPlanet />} />
+          <Route path="/" element={<Promo />} />
           <Route path="persons" element={<Persons />} />
           <Route path="starships" element={<Starships />} />
           <Route path="planets" element={<Planets />} />

@@ -3,11 +3,13 @@ import { LOAD_PLANET_REQUEST, LOAD_PLANET_SUCCESS, LOAD_PLANET_FAILURE } from '.
 
 const initialState = {
     planet: {},
+    person: {},
+    starship: {},
     loading: false,
     error: null
 };
 
-const randomPlanetReducer = (state=initialState, action) => {
+const promoReducer = (state=initialState, action) => {
     if(typeof action === "undefined") return state
     switch(action.type) {
         case LOAD_PLANET_REQUEST:
@@ -21,5 +23,5 @@ const randomPlanetReducer = (state=initialState, action) => {
     }
 };
 
-export default randomPlanetReducer;
+export default promoReducer;
 

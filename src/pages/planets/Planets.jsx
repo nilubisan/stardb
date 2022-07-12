@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './planets.css'
 import Loader from '../../components/loader'
 import ErrorIndicator from '../../components/errorIndicator'
-import { fetchPlanetsByPageNumberRequest } from '../../redux/modules/planets/actions/actions'
+import { fetchPlanetsByPageNumberRequest } from '../../redux/modules/planet/actions/actions'
 import CardView from '../../components/card';
 import { connect } from 'react-redux'
 import Paginator from '../../components/paginator'

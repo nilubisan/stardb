@@ -6,9 +6,14 @@ import {
     loadPlanetsSuccess,
 } from '../actions/actions'
 import { call, put } from 'redux-saga/effects'
+import {
+    loadPersonsFailure,
+    loadPersonsRequest,
+    loadPersonsSuccess
+} from '../../persons/actions/actions'
 
 
-function* fetchPlanetsByPageNumberWorker(action) {
+export function* fetchPlanetsByPageNumberWorker(action) {
     try {
         yield put(changeCurrentPlanetsPageNumber(action.pageNumber))
         yield put(loadPlanetsRequest())
@@ -17,6 +22,14 @@ function* fetchPlanetsByPageNumberWorker(action) {
     } catch (error) {
         yield put(loadPlanetsFailure(error))
     }
-};
+}
 
-export default fetchPlanetsByPageNumberWorker
+export function* getPlanetsByIdWorker(planetId) {
+    try{
+        yield put(loadPlanetsRequest());
+        const planet = yield call(swapiService.getPlanetById.bind(swapiService), planetId);
+        yield put(loadPlanetsSuccess(planet));
+    } catch(error) {
+        yield put(loadPlanetsFailure(error));
+    }
+}

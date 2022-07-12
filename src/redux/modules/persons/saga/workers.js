@@ -7,8 +7,7 @@ import {
 } from '../actions/actions'
 import { call, put } from 'redux-saga/effects'
 
-
-function* fetchPersonsByPageNumberWorker(action) {
+export function* fetchPersonsByPageNumberWorker(action) {
     try {
         yield put(changeCurrentPersonsPageNumber(action.pageNumber))
         yield put(loadPersonsRequest())
@@ -19,4 +18,12 @@ function* fetchPersonsByPageNumberWorker(action) {
     }
 }
 
-export default fetchPersonsByPageNumberWorker
+export function* getPersonByIdWorker(personId) {
+    try{
+        yield put(loadPersonsRequest());
+        const person = yield call(swapiService.getPersonById.bind(swapiService), personId);
+        yield put(loadPersonsSuccess(person));
+    } catch(error) {
+        yield put(loadPersonsFailure(error));
+    }
+};
