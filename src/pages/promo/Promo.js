@@ -24,7 +24,8 @@ const Promo = ({
                    planetLoading,
                    personError,
                    starshipError,
-                   planetError
+                   planetError,
+                   initPromoRequest
                }) => {
     const entities = [person, planet, starship];
 
@@ -33,7 +34,7 @@ const Promo = ({
 
     useEffect(() => {
         initPromoRequest()
-    }, [])
+    }, [initPromoRequest])
 
     useEffect(() => {
         if(promoInterval) {
@@ -63,7 +64,7 @@ const Promo = ({
         <div className="promo__container">
             { loader }
             { errorMessage }
-            { ((!personLoading && !starshipLoading && !planetLoading) && (!personError && !starshipError && !planetError) && planet.id) ? (
+            { ((!personLoading && !starshipLoading && !planetLoading) && (!personError && !starshipError && !planetError) && (person !== null && starship !==null && planet !== null)) ? (
                 <div className="promo">
                     <div className="promo__select-period">
                     <span className="promo__select-period-title">
@@ -84,8 +85,8 @@ const Promo = ({
                     </div>
                     <div className="promo__cards-container">
                         {
-                            entities.map((entity) => (
-                                <Card entity={entity} cardStyles={ { maxWidth: 200, margin: 2 } }/>
+                            entities.map((entity, i) => (
+                                <Card entity={entity} key={i} cardStyles={ { maxWidth: 200, margin: 2 } }/>
                             ))
                         };
                     </div>
@@ -115,4 +116,4 @@ const mapDispatchToProps = {
     initPromoRequest
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Promo)
+export default connect(mapStateToProps, mapDispatchToProps)(Promo);

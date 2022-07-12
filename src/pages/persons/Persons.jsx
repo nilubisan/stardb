@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './persons.css'
 import Loader from '../../components/loader'
 import ErrorIndicator from '../../components/errorIndicator'
-import { fetchPersonsByPageNumberRequest } from '../../redux/modules/persons/actions/actions'
+import { fetchPersonsByPageNumberRequest } from '../../redux/modules/person/actions/actions'
 import CardView from '../../components/card';
 import { connect } from 'react-redux'
 import Paginator from '../../components/paginator'

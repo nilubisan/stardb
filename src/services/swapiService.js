@@ -1,6 +1,7 @@
 
 import {isObjectEmpty} from '../utils/commonUtils'
 import { transformStarship, transformPlanet, transformPerson } from '../utils/swapiServiceUtils'
+import {getRandomEntityId} from '../utils/commonUtils';
 
 // CONSTANTS
 const GET_ALL_PLANETS_PATH = "planets";
@@ -73,9 +74,9 @@ const swapiService = {
     async getPersonById(id) {
         const url = `people/${ id }`;
         const person = await this.getResource(url);
-        const transformedPerson = transformPerson(person);
-        transformedPerson.imgSrc = await this._getValidImageSrc({entity:"persons", id: transformedPerson.id});
-        return transformedPerson;
+            const transformedPerson = transformPerson(person);
+            transformedPerson.imgSrc = await this._getValidImageSrc({entity:"persons", id: transformedPerson.id});
+            return transformedPerson;
     },
 
     async getStarshipById(id) {

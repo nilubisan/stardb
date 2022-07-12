@@ -1,12 +1,12 @@
-import { fetchRandomPlanetWatcher } from '../../promo/saga/promoWatcher';
-import { fetchPersonsByPageNumberWatcher } from '../../persons/saga/watchers';
-import { fetchStarshipsByPageNumberWatcher} from '../../starships/saga/watchers';
+import { initPromoWatcher } from '../../promo/saga/watcher';
+import { fetchPersonsByPageNumberWatcher } from '../../person/saga/watchers';
+import { fetchStarshipsByPageNumberWatcher} from '../../starship/saga/watchers';
 import { fetchPlanetsByPageNumberWatcher} from '../../planet/saga/watchers';
 import {all} from 'redux-saga/effects'
 
 function* rootSaga() {
     yield all([
-        fetchRandomPlanetWatcher(),
+        initPromoWatcher(),
         fetchPersonsByPageNumberWatcher(),
         fetchStarshipsByPageNumberWatcher(),
         fetchPlanetsByPageNumberWatcher()

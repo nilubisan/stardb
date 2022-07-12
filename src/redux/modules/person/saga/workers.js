@@ -4,6 +4,7 @@ import {
     loadPersonsFailure,
     loadPersonsRequest,
     loadPersonsSuccess,
+    loadPersonSuccess
 } from '../actions/actions'
 import { call, put } from 'redux-saga/effects'
 
@@ -22,7 +23,7 @@ export function* getPersonByIdWorker(personId) {
     try{
         yield put(loadPersonsRequest());
         const person = yield call(swapiService.getPersonById.bind(swapiService), personId);
-        yield put(loadPersonsSuccess(person));
+        yield put(loadPersonSuccess(person));
     } catch(error) {
         yield put(loadPersonsFailure(error));
     }

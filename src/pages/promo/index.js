@@ -1,3 +1,3 @@
-import RandomPlanet from './Promo';
+import Promo from './Promo';
 
-export default RandomPlanet;
+export default Promo;

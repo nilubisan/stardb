@@ -1,16 +1,12 @@
 import swapiService from '../../../../services/swapiService'
+import { call, put } from 'redux-saga/effects'
 import {
     changeCurrentPlanetsPageNumber,
     loadPlanetsFailure,
     loadPlanetsRequest,
     loadPlanetsSuccess,
+    loadPlanetSuccess
 } from '../actions/actions'
-import { call, put } from 'redux-saga/effects'
-import {
-    loadPersonsFailure,
-    loadPersonsRequest,
-    loadPersonsSuccess
-} from '../../persons/actions/actions'
 
 
 export function* fetchPlanetsByPageNumberWorker(action) {
@@ -28,7 +24,7 @@ export function* getPlanetsByIdWorker(planetId) {
     try{
         yield put(loadPlanetsRequest());
         const planet = yield call(swapiService.getPlanetById.bind(swapiService), planetId);
-        yield put(loadPlanetsSuccess(planet));
+        yield put(loadPlanetSuccess(planet));
     } catch(error) {
         yield put(loadPlanetsFailure(error));
     }

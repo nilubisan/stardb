@@ -1,3 +1,5 @@
+import { starshipsAllowedIDsforAPI} from './constants'
+
 export const isObjectEmpty = (someObj) => Object.keys(someObj).length === 0;
 
 export const updateObject = (oldObj, newValues) => {
@@ -14,10 +16,15 @@ export const getRandomEntityId = (entityName) => {
             maxValue = 82;
             break;
         case "starships":
-            maxValue = 36;
+            maxValue = 75;
             break;
         default:
             return false;
     }
-    return Math.floor(Math.random() * maxValue);
+    const result = Math.floor(Math.random() * maxValue) + 1;
+    if(entityName !=="starships") return result;
+    else {
+        const ind = Math.floor(Math.random() * starshipsAllowedIDsforAPI.length);
+        return starshipsAllowedIDsforAPI[ind];
+    }
 };
