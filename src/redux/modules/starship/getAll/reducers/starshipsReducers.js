@@ -1,5 +1,5 @@
 import { CHANGE_CURRENT_STARSHIPS_PAGE_NUMBER, LOAD_STARSHIPS_REQUEST, LOAD_STARSHIPS_SUCCESS, LOAD_STARSHIPS_FAILURE } from '../actions/actionTypes';
-import { updateObject } from '../../../../utils/commonUtils';
+import { updateObject } from '../../../../../utils/commonUtils';
 
 const initialState = {
     currentPageNumber: 1,

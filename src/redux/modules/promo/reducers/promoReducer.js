@@ -15,7 +15,6 @@ const initialState = {
 
 const promoReducer = (state=initialState, action) => {
     if(typeof action === "undefined") return state
-    console.log(state);
     switch(action.type) {
         case LOAD_PLANET_REQUEST:
             return updateObject(state, {planetLoading: true});

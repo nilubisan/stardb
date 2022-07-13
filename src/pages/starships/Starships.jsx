@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './starships.css'
 import Loader from '../../components/loader'
 import ErrorIndicator from '../../components/errorIndicator'
-import { fetchStarshipsByPageNumberRequest } from '../../redux/modules/starship/actions/actions'
+import { fetchStarshipsByPageNumberRequest } from '../../redux/modules/starship/getAll/actions/actions'
 import CardView from '../../components/card';
 import { connect } from 'react-redux'
 import Paginator from '../../components/paginator'

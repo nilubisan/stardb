@@ -1,4 +1,4 @@
-import swapiService from '../../../../services/swapiService'
+import swapiService from '../../../../../services/swapiService'
 import { call, put } from 'redux-saga/effects'
 import {
     changeCurrentPlanetsPageNumber,

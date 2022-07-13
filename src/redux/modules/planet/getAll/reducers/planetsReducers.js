@@ -1,5 +1,5 @@
 import { CHANGE_CURRENT_PLANETS_PAGE_NUMBER, LOAD_PLANETS_REQUEST, LOAD_PLANETS_SUCCESS, LOAD_PLANETS_FAILURE } from '../actions/actionTypes';
-import { updateObject } from '../../../../utils/commonUtils';
+import { updateObject } from '../../../../../utils/commonUtils';
 
 const initialState = {
     currentPageNumber: 1,

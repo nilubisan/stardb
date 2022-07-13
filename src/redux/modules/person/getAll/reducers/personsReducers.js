@@ -4,7 +4,7 @@ import {
     LOAD_PERSONS_REQUEST,
     LOAD_PERSONS_SUCCESS,
 } from '../actions/actionTypes'
-import { updateObject } from '../../../../utils/commonUtils'
+import { updateObject } from '../../../../../utils/commonUtils'
 
 const initialState = {
     currentPageNumber: 1,
