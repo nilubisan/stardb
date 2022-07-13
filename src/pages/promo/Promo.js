@@ -28,7 +28,6 @@ const Promo = ({
                    initPromoRequest
                }) => {
     const entities = [person, planet, starship];
-
     const [ promoInterval, setPromoInterval ] = useState(null);
     const [ promoIntervalId, setPromoIntervalId ] = useState(null);
 
@@ -57,14 +56,18 @@ const Promo = ({
         }
     }
 
-    const loader = ((personLoading || starshipLoading || planetLoading) && (!personError && !starshipError && !planetError)) ? <Loader/> : null;
-    const errorMessage = ((personError || starshipError || planetError) && (!personLoading && !starshipLoading && !planetLoading)) ? <ErrorIndicator/> : null;
+    const anyOfEntitiesStillLoading = (personLoading || starshipLoading || planetLoading);
+    const anyOfEntitiesHasError = (personError || starshipError || planetError)
+    const allEntitiesExist = (planet  && person && starship)
+
+    const loader = ( anyOfEntitiesStillLoading && !anyOfEntitiesHasError) ? <Loader/> : null;
+    const errorMessage = ( anyOfEntitiesHasError && !anyOfEntitiesStillLoading) ? <ErrorIndicator/> : null;
 
     return (
         <div className="promo__container">
             { loader }
             { errorMessage }
-            { ((!personLoading && !starshipLoading && !planetLoading) && (!personError && !starshipError && !planetError) && (person !== null && starship !==null && planet !== null)) ? (
+            { (!anyOfEntitiesStillLoading && !anyOfEntitiesHasError && allEntitiesExist) ? (
                 <div className="promo">
                     <div className="promo__select-period">
                     <span className="promo__select-period-title">
@@ -99,8 +102,8 @@ const Promo = ({
 const mapStateToProps = (state) => {
     return {
         person: state.persons.promoPerson,
-        planet: state.persons.promoPlanet,
-        starship: state.persons.promoStarship,
+        planet: state.planets.promoPlanet,
+        starship: state.starships.promoStarship,
 
         personLoading: state.persons.loading,
         planetLoading: state.planets.loading,

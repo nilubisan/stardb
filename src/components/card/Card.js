@@ -10,7 +10,6 @@ import ListItemText from '@mui/material/ListItemText';
 import {transformEntityToUniqueFeatures} from '../../utils/cardUtils';
 
 const CardView = ({ entity, cardStyles}) => {
-
     const entityUniqueFeatures = transformEntityToUniqueFeatures(entity);
 
     return (

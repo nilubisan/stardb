@@ -1,11 +1,9 @@
 
 import {isObjectEmpty} from '../utils/commonUtils'
 import { transformStarship, transformPlanet, transformPerson } from '../utils/swapiServiceUtils'
-import {getRandomEntityId} from '../utils/commonUtils';
+
 
 // CONSTANTS
-const GET_ALL_PLANETS_PATH = "planets";
-const GET_ALL_STARSHIPS = "starships";
 const API_BASE_URL = 'https://swapi.dev/api/';
 const  API_GET_IMG_URL = 'https://starwars-visualguide.com/assets/img/';
 const API_PLACEHOLDER_IMG_URL = 'https://starwars-visualguide.com/assets/img/big-placeholder.jpg';

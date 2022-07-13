@@ -18,11 +18,9 @@ const planetsReducers = (state = initialState, action) => {
         case LOAD_PLANETS_REQUEST:
             return updateObject(state, { loading: true })
         case LOAD_PLANETS_SUCCESS:
-            console.log(action)
             const {planets, pageCount} = action.result;
             return updateObject(state, { loading: false, planets, pageCount })
         case LOAD_PLANET_SUCCESS:
-            console.log(action)
             return updateObject(state, { loading: false, promoPlanet: action.planet})
         case LOAD_PLANETS_FAILURE:
             return updateObject(state, { loading: false, error: action.error })

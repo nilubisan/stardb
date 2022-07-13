@@ -1,11 +1,11 @@
-.random-planet__container {
+.promo__container {
     position: relative;
     display: flex;
     justify-content: center;
 }
 
 
-.random-planet {
+.promo {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,7 +13,7 @@
     margin-top: 100px;
 }
 
-.select-random-planet {
+.promo__select-period {
     position: absolute;
     top: 0;
     right: 0;
@@ -26,11 +26,16 @@
     align-items: center;
 }
 
-.select-random-planet__title {
+.promo__select-period-title {
     color: #FFDD00;
     margin-bottom: 10px;
 }
 
-.select-random-planet__control {
+.promo__select-period-control {
     display: flex;
+}
+
+.promo__cards-container {
+    display: flex;
+    margin-top: 50px;
 }
