@@ -101,17 +101,17 @@ const Promo = ({
 
 const mapStateToProps = (state) => {
     return {
-        person: state.persons.promoPerson,
-        planet: state.planets.promoPlanet,
-        starship: state.starships.promoStarship,
+        person: state.promo.person,
+        planet: state.promo.planet,
+        starship: state.promo.starship,
 
-        personLoading: state.persons.loading,
-        planetLoading: state.planets.loading,
-        starshipLoading: state.starships.loading,
+        personLoading: state.promo.personLoading,
+        planetLoading: state.promo.planetLoading,
+        starshipLoading: state.promo.starshipLoading,
 
-        personError: state.persons.error,
-        planetError: state.planets.error,
-        starshipError: state.starships.error,
+        personError: state.promo.personError,
+        planetError: state.promo.planetError,
+        starshipError: state.promo.starshipError,
     }
 }
 

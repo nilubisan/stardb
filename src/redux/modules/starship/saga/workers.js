@@ -4,7 +4,6 @@ import {
     loadStarshipsFailure,
     loadStarshipsRequest,
     loadStarshipsSuccess,
-    loadStarshipSuccess,
 } from '../actions/actions'
 import { call, put } from 'redux-saga/effects'
 
@@ -16,15 +15,5 @@ export function* fetchStarshipsByPageNumberWorker(action) {
         yield put(loadStarshipsSuccess(result))
     } catch (error) {
         yield put(loadStarshipsFailure(error))
-    }
-};
-
-export function* getStarshipByIdWorker(starshipId) {
-    try{
-        yield put(loadStarshipsRequest());
-        const starship = yield call(swapiService.getStarshipById.bind(swapiService), starshipId);
-        yield put(loadStarshipSuccess(starship));
-    } catch(error) {
-        yield put(loadStarshipsFailure(error));
     }
 }

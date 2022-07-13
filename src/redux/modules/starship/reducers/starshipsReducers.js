@@ -1,8 +1,7 @@
-import { CHANGE_CURRENT_STARSHIPS_PAGE_NUMBER, LOAD_STARSHIPS_REQUEST, LOAD_STARSHIP_SUCCESS, LOAD_STARSHIPS_SUCCESS, LOAD_STARSHIPS_FAILURE } from '../actions/actionTypes';
+import { CHANGE_CURRENT_STARSHIPS_PAGE_NUMBER, LOAD_STARSHIPS_REQUEST, LOAD_STARSHIPS_SUCCESS, LOAD_STARSHIPS_FAILURE } from '../actions/actionTypes';
 import { updateObject } from '../../../../utils/commonUtils';
 
 const initialState = {
-    promoStarship: null,
     currentPageNumber: 1,
     pageCount: null,
     starships: null,
@@ -20,8 +19,6 @@ const starshipsReducers = (state = initialState, action) => {
         case LOAD_STARSHIPS_SUCCESS:
             const {starships, pageCount} = action.result;
             return updateObject(state, { loading: false, starships, pageCount })
-        case LOAD_STARSHIP_SUCCESS:
-            return updateObject(state, { loading: false, promoStarship: action.starship })
         case LOAD_STARSHIPS_FAILURE:
             return updateObject(state, { loading: false, error: action.error })
         default:

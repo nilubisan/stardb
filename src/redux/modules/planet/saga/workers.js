@@ -5,7 +5,6 @@ import {
     loadPlanetsFailure,
     loadPlanetsRequest,
     loadPlanetsSuccess,
-    loadPlanetSuccess
 } from '../actions/actions'
 
 
@@ -17,15 +16,5 @@ export function* fetchPlanetsByPageNumberWorker(action) {
         yield put(loadPlanetsSuccess(result))
     } catch (error) {
         yield put(loadPlanetsFailure(error))
-    }
-}
-
-export function* getPlanetsByIdWorker(planetId) {
-    try{
-        yield put(loadPlanetsRequest());
-        const planet = yield call(swapiService.getPlanetById.bind(swapiService), planetId);
-        yield put(loadPlanetSuccess(planet));
-    } catch(error) {
-        yield put(loadPlanetsFailure(error));
     }
 }
