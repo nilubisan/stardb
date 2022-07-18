@@ -1,7 +1,7 @@
 import {fork, put, call} from 'redux-saga/effects'
 import {getRandomEntityId} from '../../../../utils/commonUtils';
 import {loadPromoError} from '../actions/actions';
-import swapiService from '../../../../services/swapiService';
+import swapiService from '../../../../services/swapi-service/swapiService';
 import {loadPlanetRequest, loadPlanetSuccess, loadPlanetFailure, loadPersonRequest, loadPersonSuccess, loadPersonFailure, loadStarshipRequest, loadStarshipSuccess, loadStarshipFailure} from '../actions/actions';
 
 function* promoWorker() {

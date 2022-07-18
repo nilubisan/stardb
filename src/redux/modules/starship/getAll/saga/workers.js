@@ -1,4 +1,4 @@
-import swapiService from '../../../../../services/swapiService'
+import swapiService from '../../../../../services/swapi-service/swapiService'
 import {
     changeCurrentStarshipsPageNumber,
     loadStarshipsFailure,

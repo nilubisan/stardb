@@ -1,5 +1,5 @@
-import { isObjectEmpty } from '../utils/commonUtils'
-import { transformPerson, transformPlanet, transformStarship } from '../utils/swapiServiceUtils'
+import { isObjectEmpty } from '../../utils/commonUtils'
+import { transformPerson, transformPlanet, transformStarship } from '../../utils/swapiServiceUtils'
 
 
 // CONSTANTS
@@ -18,9 +18,9 @@ const swapiService = {
             return await res.json()
         } else {
             if(params.checkIsAvailable) {
-                const fetchURL = `${ API_GET_IMG_URL }${ url }`
-                const res = await fetch(fetchURL)
-                return res.status !== 404
+                const fetchURL = `${ API_GET_IMG_URL }${ url }`;
+                const res = await fetch(fetchURL);
+                return res.status !== 404;
             }
         }
     },
