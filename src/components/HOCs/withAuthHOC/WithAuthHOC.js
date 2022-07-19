@@ -1,15 +1,15 @@
-import React from 'react';
 import Login from '../../login';
 import authService from '../../../services/auth-service/authService'
+import tokenService from '../../../services/token-service/tokenService'
 
-const WithAuth = (wrappedComponent) => {
-    const accessToken = localStorage.getItem("accessToken");
+const WithAuth = (WrappedComponent)  => (props) =>  {
+    const accessToken = tokenService.getAccessToken();
     if(accessToken) {
         authService.checkAccessToken().then((res) => {
-            return res ? wrappedComponent : Login
-        })
+            return res ? <WrappedComponent props /> : <Login />
+        });
     }
-    return Login;
+    return <Login />;
 };
 
 export default WithAuth;

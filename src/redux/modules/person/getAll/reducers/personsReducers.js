@@ -12,7 +12,7 @@ const initialState = {
     persons: null,
     loading: false,
     error: false
-}
+};
 
 const personsReducers = (state = initialState, action) => {
     if(typeof action === 'undefined') return state
@@ -31,4 +31,4 @@ const personsReducers = (state = initialState, action) => {
     }
 }
 
-export default personsReducers
+export default personsReducers;

@@ -1,12 +1,12 @@
-import swapiService from '../../../../../services/swapi-service/swapiService'
+import swapiService from '../../../../../services/swapi-service/swapiService';
 import {
     changeCurrentPersonsPageNumber,
     loadPersonsFailure,
     loadPersonsRequest,
     loadPersonsSuccess,
     loadPersonSuccess
-} from '../actions/actions'
-import { call, put } from 'redux-saga/effects'
+} from '../actions/actions';
+import { call, put } from 'redux-saga/effects';
 
 export function* fetchPersonsByPageNumberWorker(action) {
     try {
