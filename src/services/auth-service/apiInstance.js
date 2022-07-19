@@ -32,10 +32,11 @@ instance.interceptors.response.use(
         const originalConfig = err.config;
         if(originalConfig.url !== SIGN_IN_URL_PATH && err.response ) {
             console.log(originalConfig);
-            if(err.response.status === 401 && !err.response.headers.retry) {
+            if(err.response.status === 401 && !originalConfig._retry) {
                 try {
+                    originalConfig["_retry"] = true;
                     const rs = await instance.post(REFRESH_TOKEN_URL_PATH, {}, {
-                        headers: { "x-satrap-2": tokenService.getRefreshToken(), "retry": true }
+                        headers: { "x-satrap-2": tokenService.getRefreshToken() }
                     });
                     const { headers } = rs;
                     tokenService.setAccessToken(headers["x-satrap-1"]);

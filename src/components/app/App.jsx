@@ -6,6 +6,7 @@ import Persons from '../../pages/persons'
 import Starships from '../../pages/starships';
 import Planets from '../../pages/planets';
 import Header from "../header";
+import Login from "../login"
 import "./app.css";
 
 
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="persons" element={<Persons />} />
           <Route path="starships" element={<Starships />} />
           <Route path="planets" element={<Planets />} />
+          <Route path="login" element={<Login />} />
         </Routes>
       </div>
     </Router>

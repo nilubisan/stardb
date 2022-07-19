@@ -29,3 +29,7 @@ const authService = {
 };
 
 export default authService;
+
+// axios-retries Allows request-specific configuration
+// Config params property
+

@@ -3,6 +3,7 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
+import LoginIcon from '@mui/icons-material/Login';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -11,6 +12,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import {NavLink} from 'react-router-dom'
 import Logo from './logo.png';
+import { useNavigate } from "react-router-dom";
 import "./header.css";
 
 const ResponsiveAppBar = () => {
@@ -26,6 +28,8 @@ const pages = ['persons', 'planets', 'starships'];
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+
+  const navigate = useNavigate();
 
   return (
     <AppBar position="static" style={{ background: 'rgba(0,0,0, 0.3)' }}>
@@ -121,6 +125,9 @@ const pages = ['persons', 'planets', 'starships'];
               </Button>
             ))}
           </Box>
+          <Button variant="outlined" style={{color: '#FFDD00', borderColor: '#FFDD00'}} startIcon={<LoginIcon />} onClick={() => navigate("/login")}>
+        Login
+      </Button>
         </Toolbar>
       </Container>
     </AppBar>

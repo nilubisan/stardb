@@ -6,7 +6,7 @@ import { fetchStarshipsByPageNumberRequest } from '../../redux/modules/starship/
 import CardView from '../../components/card';
 import { connect } from 'react-redux'
 import Paginator from '../../components/paginator'
-import WithAuth from '../../components/HOCs/withAuthHOC/WithAuthHOC'
+import WithAuth from '../../components/hoc/withAuthHOC/WithAuthHOC'
 
 const Starships = ({
                      starships,

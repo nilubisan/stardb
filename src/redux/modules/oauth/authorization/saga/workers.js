@@ -1,4 +1,4 @@
-import {loginUserRequest, loginUserSuccess, loginUserFail} from '../actions/actions'
+import {loginUserRequest, loginUserSuccess, loginUserFail, logoutUserSuccess} from '../actions/actions'
 import authService from '../../../../../services/auth-service/authService';
 import tokenService from '../../../../../services/token-service/tokenService'
 import {put, call} from 'redux-saga/effects';
@@ -13,6 +13,13 @@ export function* loginUserWorker(action) {
     } catch (error) {
         loginUserFail(error);
     }
+};
+
+export function* logoutUserWorker() {
+       tokenService.removeAccessToken();
+       tokenService.removeRefreshToken();
+       yield put(logoutUserSuccess());
+
 }
 
 
