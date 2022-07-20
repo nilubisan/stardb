@@ -6,7 +6,7 @@ import { fetchPlanetsByPageNumberRequest } from '../../redux/modules/planet/getA
 import CardView from '../../components/card';
 import { connect } from 'react-redux'
 import Paginator from '../../components/paginator'
-import WithAuth from '../../components/hoc/withAuthHOC/WithAuthHOC'
+
 
 const Planets = ({
                      planets,
@@ -62,4 +62,4 @@ const mapDispatchToProps = {
     fetchPlanetsByPageNumberRequest
 }
 
-export default WithAuth(connect(mapStateToProps, mapDispatchToProps)(Planets))
+export default connect(mapStateToProps, mapDispatchToProps)(Planets)

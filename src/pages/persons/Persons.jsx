@@ -6,7 +6,7 @@ import { fetchPersonsByPageNumberRequest } from '../../redux/modules/person/getA
 import CardView from '../../components/card';
 import { connect } from 'react-redux'
 import Paginator from '../../components/paginator'
-import WithAuth from '../../components/hoc/withAuthHOC/WithAuthHOC'
+
 
 const Persons = ({
                      persons,
@@ -61,4 +61,4 @@ const mapDispatchToProps = {
     fetchPersonsByPageNumberRequest
 }
 
-export default WithAuth(connect(mapStateToProps, mapDispatchToProps)(Persons));
+export default connect(mapStateToProps, mapDispatchToProps)(Persons);

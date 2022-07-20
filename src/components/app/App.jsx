@@ -1,32 +1,53 @@
-import React from "react";
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import ErrorBoundary from '../errorBoundary'
-import Promo from "../../pages/promo";
+import Promo from '../../pages/promo'
 import Persons from '../../pages/persons'
-import Starships from '../../pages/starships';
-import Planets from '../../pages/planets';
-import Header from "../header";
-import Login from "../login"
-import "./app.css";
+import Starships from '../../pages/starships'
+import Planets from '../../pages/planets'
+import Header from '../header'
+import Login from '../login'
+import Loader from '../loader'
+import ProtectedLayout from '../protectedLayout'
+import { initializeApp } from '../../redux/modules/app/actions/actions'
+import { connect } from 'react-redux'
+import './app.css'
 
+const App = ({ isInitialized, isAuth, initializeApp }) => {
+    useEffect(() => {
+        initializeApp()
+    }, [initializeApp])
+    return (
+        !isInitialized ? (
+            <Loader/>
+        ) : (
+            <ErrorBoundary>
+                <Router>
+                    <div className="main">
+                        <Header/>
+                        <Routes>
+                            <Route path="/" element={ <Promo/> }/>
+                            <Route element={ <ProtectedLayout isAuth={ isAuth }/> }>
+                                <Route path="persons" element={ <Persons/> }/>
+                                <Route path="starships" element={ <Starships/> }/>
+                                <Route path="planets" element={ <Planets/> }/>
+                            </Route>
+                            <Route path="login" element={ <Login/> }/>
+                        </Routes>
+                    </div>
+                </Router>
+            </ErrorBoundary>
+        )
+    )
+}
 
-const App = () => {
-  return (
-      <ErrorBoundary>
-    <Router>
-      <div className="main">
-        <Header />
-        <Routes>
-          <Route path="/" element={<Promo />} />
-          <Route path="persons" element={<Persons />} />
-          <Route path="starships" element={<Starships />} />
-          <Route path="planets" element={<Planets />} />
-          <Route path="login" element={<Login />} />
-        </Routes>
-      </div>
-    </Router>
-      </ErrorBoundary>
-  );
+const mapStateToProps = (state) => ({
+    isInitialized: state.app.isInitialized,
+    isAuth: state.app.isAuth
+})
+
+const mapDispatchToProps = {
+    initializeApp
 };
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

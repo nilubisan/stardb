@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -13,9 +14,13 @@ import MenuItem from '@mui/material/MenuItem';
 import {NavLink} from 'react-router-dom'
 import Logo from './logo.png';
 import { useNavigate } from "react-router-dom";
+import {connect} from 'react-redux';
 import "./header.css";
 
-const ResponsiveAppBar = () => {
+import {logoutUser} from '../../redux/modules/oauth/authorization/actions/actions';
+
+
+const Header = ({isAuth, logoutUser}) => {
 
 const pages = ['persons', 'planets', 'starships'];
 
@@ -125,12 +130,29 @@ const pages = ['persons', 'planets', 'starships'];
               </Button>
             ))}
           </Box>
-          <Button variant="outlined" style={{color: '#FFDD00', borderColor: '#FFDD00'}} startIcon={<LoginIcon />} onClick={() => navigate("/login")}>
-        Login
-      </Button>
+            {
+                isAuth ? (
+                    <Button variant="outlined" style={{color: '#FFDD00', borderColor: '#FFDD00'}} startIcon={<LogoutIcon />} onClick={() => logoutUser()}>
+                        Log out
+                    </Button>
+                ) : (
+                    <Button variant="outlined" style={{color: '#FFDD00', borderColor: '#FFDD00'}} startIcon={<LoginIcon />} onClick={() => navigate("/login")}>
+                        Login
+                    </Button>
+                )
+            }
         </Toolbar>
       </Container>
     </AppBar>
   );
 };
-export default ResponsiveAppBar;
+
+const mapStateToProps = (state) => ({
+    isAuth: state.app.isAuth
+});
+
+const mapDispatchToProps = {
+    logoutUser
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

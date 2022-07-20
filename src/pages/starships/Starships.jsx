@@ -6,7 +6,6 @@ import { fetchStarshipsByPageNumberRequest } from '../../redux/modules/starship/
 import CardView from '../../components/card';
 import { connect } from 'react-redux'
 import Paginator from '../../components/paginator'
-import WithAuth from '../../components/hoc/withAuthHOC/WithAuthHOC'
 
 const Starships = ({
                      starships,
@@ -62,4 +61,4 @@ const mapDispatchToProps = {
     fetchStarshipsByPageNumberRequest
 }
 
-export default WithAuth(connect(mapStateToProps, mapDispatchToProps)(Starships));
+export default connect(mapStateToProps, mapDispatchToProps)(Starships);
