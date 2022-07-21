@@ -3,6 +3,7 @@ import { fetchPersonsByPageNumberWatcher } from '../../person/getAll/saga/watche
 import { fetchStarshipsByPageNumberWatcher} from '../../starship/getAll/saga/watchers';
 import { fetchPlanetsByPageNumberWatcher} from '../../planet/getAll/saga/watchers';
 import { loginWatcher } from '../../oauth/authorization/saga/watchers';
+import authenticateUserWatcher from '../../oauth/authentication/saga/watchers'
 import {all} from 'redux-saga/effects'
 import { initializeAppWatcher } from '../../app/saga/watchers'
 
@@ -13,7 +14,8 @@ function* rootSaga() {
         initPromoWatcher(),
         fetchPersonsByPageNumberWatcher(),
         fetchStarshipsByPageNumberWatcher(),
-        fetchPlanetsByPageNumberWatcher()
+        fetchPlanetsByPageNumberWatcher(),
+        authenticateUserWatcher()
     ])
 }
 

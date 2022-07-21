@@ -48,15 +48,13 @@ const Planets = ({
     )
 }
 
-const mapStateToProps = (state) => {
-    console.log(state)
-    return {
+const mapStateToProps = (state) => ({
     planets: state.planets.planets,
     loading: state.planets.loading,
     error: state.planets.error,
     currentPageNumber: state.planets.currentPageNumber,
     pageCount: state.planets.pageCount
-}}
+})
 
 const mapDispatchToProps = {
     fetchPlanetsByPageNumberRequest

@@ -5,6 +5,7 @@ import planetsReducers from '../../planet/getAll/reducers/planetsReducers'
 import promoReducer from '../../promo/reducers/promoReducer'
 import loginReducer from '../../oauth/authorization/reducers/authorizationReducer'
 import appReducer from '../../app/reducers/appReducer'
+import authReducer from '../../oauth/authentication/reducers/authenticationReducer'
 
 export default combineReducers({
     app: appReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
     starships: starshipsReducers,
     planets: planetsReducers,
     promo: promoReducer,
-    login: loginReducer
+    login: loginReducer,
+    auth: authReducer
 });

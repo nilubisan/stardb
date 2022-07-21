@@ -13,10 +13,11 @@ import { initializeApp } from '../../redux/modules/app/actions/actions'
 import { connect } from 'react-redux'
 import './app.css'
 
-const App = ({ isInitialized, isAuth, initializeApp }) => {
+const App = ({ isInitialized, initializeApp }) => {
     useEffect(() => {
         initializeApp()
-    }, [initializeApp])
+    }, [])
+
     return (
         !isInitialized ? (
             <Loader/>
@@ -27,9 +28,13 @@ const App = ({ isInitialized, isAuth, initializeApp }) => {
                         <Header/>
                         <Routes>
                             <Route path="/" element={ <Promo/> }/>
-                            <Route element={ <ProtectedLayout isAuth={ isAuth }/> }>
+                            <Route element={ <ProtectedLayout /> }>
                                 <Route path="persons" element={ <Persons/> }/>
+                            </Route>
+                            <Route element={ <ProtectedLayout /> }>
                                 <Route path="starships" element={ <Starships/> }/>
+                            </Route>
+                            <Route element={ <ProtectedLayout /> }>
                                 <Route path="planets" element={ <Planets/> }/>
                             </Route>
                             <Route path="login" element={ <Login/> }/>
@@ -42,8 +47,7 @@ const App = ({ isInitialized, isAuth, initializeApp }) => {
 }
 
 const mapStateToProps = (state) => ({
-    isInitialized: state.app.isInitialized,
-    isAuth: state.app.isAuth
+    isInitialized: state.app.isInitialized
 })
 
 const mapDispatchToProps = {

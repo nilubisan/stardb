@@ -48,7 +48,6 @@ const Starships = ({
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         starships: state.starships.starships,
         loading: state.starships.loading,

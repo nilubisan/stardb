@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Button, Container, TextField, Typography } from '@mui/material'
 
-const LoginView = ({ handleInputChange, onFormSubmit, }) => {
+const LoginView = ({ handleInputChange, onFormSubmit, error}) => {
     return (
         <Container component="main" maxWidth="xs" style={{backgroundColor: "rgba(255,255,255,.9)"}}>
             <Box
@@ -39,6 +39,13 @@ const LoginView = ({ handleInputChange, onFormSubmit, }) => {
                         autoComplete="current-password"
                         onChange={handleInputChange}
                     />
+                    {
+                        error ? (
+                            <Typography variant={'subtitle1'} sx={{
+                                color: 'red'
+                            }}>{error}</Typography>
+                        ) : null
+                    }
                     <Button
                         type="submit"
                         fullWidth

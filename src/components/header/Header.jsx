@@ -147,9 +147,9 @@ const pages = ['persons', 'planets', 'starships'];
   );
 };
 
-const mapStateToProps = (state) => ({
-    isAuth: state.app.isAuth
-});
+const mapStateToProps = (state) => {
+    return {isAuth: state.login.isAuth}
+};
 
 const mapDispatchToProps = {
     logoutUser
