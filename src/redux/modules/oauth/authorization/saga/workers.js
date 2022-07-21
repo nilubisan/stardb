@@ -8,32 +8,14 @@ import authService from '../../../../../services/auth-service/authService'
 import tokenService from '../../../../../services/token-service/tokenService'
 import { call, put } from 'redux-saga/effects'
 
-const LOGIN = 'LOGIN'
-const LOGOUT = 'LOGOUT'
-
-const redirectAfterEvent = (event) => {
-    switch (event) {
-        case LOGIN:
-             window.location.href = '/'
-            break
-        case LOGOUT:
-            window.location.href = '/'
-            break
-        default:
-            break
-    }
-
-}
-
-
 export function* loginUserWorker(action) {
     yield put(loginUserRequest())
     try {
-        const result = yield call(authService.login, action.username, action.password)
+        const result = yield call(authService.login, action.username, action.password);
         tokenService.setAccessToken(result.accessToken)
         tokenService.setRefreshToken(result.refreshToken)
         yield put(loginUserSuccess())
-        redirectAfterEvent(LOGIN)
+        window.location.replace("/");
     } catch (e) {
         let errorMessage;
         if (e.response.status === 401) {
@@ -41,7 +23,7 @@ export function* loginUserWorker(action) {
         } else {
             errorMessage = "Error occurred! Please try later";
         }
-        yield put(loginUserFail(errorMessage))
+        yield put(loginUserFail(errorMessage));
     }
 }
 
@@ -49,7 +31,6 @@ export function* logoutUserWorker() {
     tokenService.removeAccessToken()
     tokenService.removeRefreshToken()
     yield put(setAuthStatus(false))
-    redirectAfterEvent(LOGOUT)
 }
 
 

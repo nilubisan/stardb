@@ -30,11 +30,7 @@ const App = ({ isInitialized, initializeApp }) => {
                             <Route path="/" element={ <Promo/> }/>
                             <Route element={ <ProtectedLayout /> }>
                                 <Route path="persons" element={ <Persons/> }/>
-                            </Route>
-                            <Route element={ <ProtectedLayout /> }>
                                 <Route path="starships" element={ <Starships/> }/>
-                            </Route>
-                            <Route element={ <ProtectedLayout /> }>
                                 <Route path="planets" element={ <Planets/> }/>
                             </Route>
                             <Route path="login" element={ <Login/> }/>

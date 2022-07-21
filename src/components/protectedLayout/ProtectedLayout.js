@@ -4,20 +4,19 @@ import {authenticateUser} from '../../redux/modules/oauth/authentication/actions
 import { connect } from 'react-redux'
 import Loader from '../loader';
 
-const ProtectedLayout = ({isAuth, loading, authenticateUser, isInitialized}) => {
+const ProtectedLayout = ({isAuth, loading, authenticateUser}) => {
     useEffect(() => {
         authenticateUser();
     }, []);
     return (
         loading ? <Loader /> :
-            (!loading && isAuth) ? <Outlet /> : <Navigate to="/login" />
+            (!loading && isAuth) ? <Outlet /> : <Navigate to="/login" replace="true" />
     );
 };
 
 const mapStateToProps = (state) => ({
     isAuth: state.login.isAuth,
-    loading: state.auth.loading,
-    isInitialized: state.app.isInitialized
+    loading: state.auth.loading
 });
 
 const mapDispatchToProps = {
