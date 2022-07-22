@@ -11,7 +11,9 @@ const Login = ({authError, loginUser}) => {
             password: ''
         },
         onSubmit: ({username, password}) => {
-            loginUser(username, password);
+            const isValid = document.querySelector("#password").checkValidity();
+
+            if(isValid) loginUser(username, password);
         }
     });
 

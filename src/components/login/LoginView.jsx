@@ -16,19 +16,24 @@ const LoginView = ({ handleInputChange, onFormSubmit, error}) => {
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
-                <Box component="form" onSubmit={onFormSubmit} noValidate sx={{ mt: 1 }}>
+                <Box component="form" onSubmit={onFormSubmit} noValidate sx={{ mt: 1 }} data-cy="login-form">
                     <TextField
+                        autoComplete="off"
                         margin="normal"
                         required
                         fullWidth
-                        id="email"
+                        id="username"
                         label="Username"
                         name="username"
-                        autoComplete="email"
                         autoFocus
                         onChange={handleInputChange}
+                        inputProps={{
+                            'minLength': '3',
+                            'data-cy': 'username-input',
+                        }}
                     />
                     <TextField
+                        autoComplete="off"
                         margin="normal"
                         required
                         fullWidth
@@ -36,8 +41,11 @@ const LoginView = ({ handleInputChange, onFormSubmit, error}) => {
                         label="Password"
                         type="password"
                         id="password"
-                        autoComplete="current-password"
                         onChange={handleInputChange}
+                        inputProps={{
+                            'minLength': '6',
+                            'data-cy': 'password-input'
+                        }}
                     />
                     {
                         error ? (

@@ -37,7 +37,7 @@ const pages = ['persons', 'planets', 'starships'];
   const navigate = useNavigate();
 
   return (
-    <AppBar position="static" style={{ background: 'rgba(0,0,0, 0.3)' }}>
+    <AppBar position="static" data-cy="header" style={{ background: 'rgba(0,0,0, 0.3)' }}>
       <Container maxWidth="xl" >
         <Toolbar disableGutters >
         <Box
@@ -132,11 +132,11 @@ const pages = ['persons', 'planets', 'starships'];
           </Box>
             {
                 isAuth ? (
-                    <Button variant="outlined" style={{color: '#FFDD00', borderColor: '#FFDD00'}} startIcon={<LogoutIcon />} onClick={() => logoutUser()}>
+                    <Button variant="outlined" style={{color: '#FFDD00', borderColor: '#FFDD00'}} data-cy="logout-btn" startIcon={<LogoutIcon />} onClick={() => logoutUser()}>
                         Log out
                     </Button>
                 ) : (
-                    <Button variant="outlined" style={{color: '#FFDD00', borderColor: '#FFDD00'}} startIcon={<LoginIcon />} onClick={() => navigate("/login")}>
+                    <Button variant="outlined" style={{color: '#FFDD00', borderColor: '#FFDD00'}}  data-cy="login-btn" startIcon={<LoginIcon />} onClick={() => navigate("/login")}>
                         Login
                     </Button>
                 )
