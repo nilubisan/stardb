@@ -68,7 +68,7 @@ const Promo = ({
             { loader }
             { errorMessage }
             { (!anyOfEntitiesStillLoading && !anyOfEntitiesHasError && allEntitiesExist) ? (
-                <div className="promo">
+                <div className="promo" data-cy="promo">
                     <div className="promo__select-period">
                     <span className="promo__select-period-title">
                         Select the refresh interval for planet
@@ -91,7 +91,7 @@ const Promo = ({
                             entities.map((entity, i) => (
                                 <Card entity={entity} key={i} cardStyles={ { maxWidth: 200, margin: 2 } }/>
                             ))
-                        };
+                        }
                     </div>
                 </div>
             ) : null }

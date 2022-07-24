@@ -15,7 +15,7 @@ export function* loginUserWorker(action) {
         tokenService.setAccessToken(result.accessToken)
         tokenService.setRefreshToken(result.refreshToken)
         yield put(loginUserSuccess())
-        window.location.replace("/");
+        window.location.href = "/";
     } catch (e) {
         let errorMessage;
         if (e.response.status === 401) {

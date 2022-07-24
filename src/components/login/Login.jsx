@@ -1,20 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { useFormik } from 'formik';
-import LoginView from './LoginView';
-import { loginUser } from '../../redux/modules/oauth/authorization/actions/actions';
+import { loginUser, loginUserFail } from '../../redux/modules/oauth/authorization/actions/actions';
 import { Box, Button, Container, TextField, Typography } from '@mui/material'
+import {validateInput} from '../../utils/loginUtils';
 
-const Login = ({authError, loginUser}) => {
+const Login = ({authError, loginUser, loginUserFail}) => {
+
     const formik = useFormik({
         initialValues: {
             username: '',
             password: ''
         },
         onSubmit: ({username, password}) => {
-            const isValid = document.querySelector("#password").checkValidity();
-
-            if(isValid) loginUser(username, password);
+            const errorMessage = validateInput(username, password);
+            if(errorMessage) {
+                loginUserFail(errorMessage);
+                return;
+            }
+            loginUser(username, password);
         }
     });
 
@@ -32,7 +36,7 @@ const Login = ({authError, loginUser}) => {
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
-                <Box component="form" onSubmit={() => formik.handleSubmit()} noValidate sx={{ mt: 1 }} data-cy="login-form">
+                <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 1 }} data-cy="login-form">
                     <TextField
                         autoComplete="off"
                         margin="normal"
@@ -44,7 +48,8 @@ const Login = ({authError, loginUser}) => {
                         autoFocus
                         onChange={formik.handleChange}
                         inputProps={{
-                            'minLength': '3',
+                            minLength: 3,
+                            maxLength: 25,
                             'data-cy': 'username-input',
                         }}
                     />
@@ -59,15 +64,16 @@ const Login = ({authError, loginUser}) => {
                         id="password"
                         onChange={formik.handleChange}
                         inputProps={{
-                            'minLength': '6',
-                            'data-cy': 'password-input'
+                            minLength: 6,
+                            maxLength: 100,
+                            'data-cy': 'password-input',
                         }}
                     />
                     {
                         authError ? (
                             <Typography variant={'subtitle1'} sx={{
                                 color: 'red'
-                            }}>{authError}</Typography>
+                            }} className="login__error-message">{authError}</Typography>
                         ) : null
                     }
                     <Button
@@ -75,6 +81,7 @@ const Login = ({authError, loginUser}) => {
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
+                        data-cy= 'login-submit-button'
                     >
                         Sign In
                     </Button>
@@ -89,7 +96,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-    loginUser
+    loginUser,
+    loginUserFail
 }
 
 

@@ -16,6 +16,7 @@ const loginReducer = (state=initialState, action) => {
         case LOGIN_USER_SUCCESS:
             return updateObject(state, { loading: false, isAuth: true });
         case LOGIN_USER_FAIL:
+            console.log(action)
             return updateObject(state, { loading: false, error: action.error });
         case SET_AUTH_STATUS:
             return updateObject(state, {isAuth: action.isAuth});
