@@ -4,7 +4,7 @@ import authService from '../../../../../services/auth-service/authService'
 import {setAuthenticationIsInProgress} from '../actions/actions'
 import { call, put } from 'redux-saga/effects'
 
-export function* authenticateUserWorker() {
+function* authenticateUserWorker() {
     yield put(setAuthenticationIsInProgress(true));
     try {
         let accessToken = tokenService.getAccessToken()

@@ -1,7 +1,10 @@
 import { FETCH_PLANETS_BY_PAGE_NUMBER_REQUEST } from "../actions/actionTypes";
-import { fetchPlanetsByPageNumberWorker } from './workers';
+import fetchPlanetsByPageNumberWorker from './fetchPlanetsByPageNumberWorker';
 import {takeLatest} from 'redux-saga/effects';
 
-export function* fetchPlanetsByPageNumberWatcher() {
+function* fetchPlanetsByPageNumberWatcher() {
     yield takeLatest(FETCH_PLANETS_BY_PAGE_NUMBER_REQUEST, fetchPlanetsByPageNumberWorker);
 };
+
+export default fetchPlanetsByPageNumberWatcher;
+

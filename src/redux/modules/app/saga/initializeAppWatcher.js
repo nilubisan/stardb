@@ -1,7 +1,9 @@
 import { INITIALIZE_APP } from '../actions/actionTypes';
 import {takeLatest} from 'redux-saga/effects'
-import { initializeAppWorker } from './workers'
+import initializeAppWorker from './initializeAppWorker'
 
-export function* initializeAppWatcher() {
+function* initializeAppWatcher() {
     yield takeLatest(INITIALIZE_APP, initializeAppWorker);
 };
+
+export default initializeAppWatcher;

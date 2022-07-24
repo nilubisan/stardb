@@ -7,7 +7,7 @@ import {
 } from '../actions/actions'
 import { call, put } from 'redux-saga/effects'
 
-export function* fetchStarshipsByPageNumberWorker(action) {
+ function* fetchStarshipsByPageNumberWorker(action) {
     try {
         yield put(changeCurrentStarshipsPageNumber(action.pageNumber))
         yield put(loadStarshipsRequest())
@@ -17,3 +17,5 @@ export function* fetchStarshipsByPageNumberWorker(action) {
         yield put(loadStarshipsFailure(error))
     }
 }
+
+export default fetchStarshipsByPageNumberWorker;

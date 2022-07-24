@@ -1,5 +1,5 @@
 import {takeLatest} from 'redux-saga/effects';
-import authenticateUserWorker from './workers'
+import authenticateUserWorker from './authenticateUserWorker'
 
 function* authenticateUserWatcher() {
     yield takeLatest("AUTHENTICATE_USER", authenticateUserWorker)

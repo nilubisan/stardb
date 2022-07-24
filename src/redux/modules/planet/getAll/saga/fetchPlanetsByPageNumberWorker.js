@@ -8,7 +8,7 @@ import {
 } from '../actions/actions'
 
 
-export function* fetchPlanetsByPageNumberWorker(action) {
+function* fetchPlanetsByPageNumberWorker(action) {
     try {
         yield put(changeCurrentPlanetsPageNumber(action.pageNumber))
         yield put(loadPlanetsRequest())
@@ -17,4 +17,6 @@ export function* fetchPlanetsByPageNumberWorker(action) {
     } catch (error) {
         yield put(loadPlanetsFailure(error))
     }
-}
+};
+
+export default fetchPlanetsByPageNumberWorker;

@@ -1,7 +1,9 @@
 import { FETCH_PERSONS_BY_PAGE_NUMBER_REQUEST } from "../actions/actionTypes";
-import { fetchPersonsByPageNumberWorker } from './workers';
+import fetchPersonsByPageNumberWorker from './fetchPersonsByPageNumberWorker';
 import {takeLatest} from 'redux-saga/effects';
 
-export function* fetchPersonsByPageNumberWatcher() {
+function* fetchPersonsByPageNumberWatcher() {
     yield takeLatest(FETCH_PERSONS_BY_PAGE_NUMBER_REQUEST, fetchPersonsByPageNumberWorker);
 };
+
+export default fetchPersonsByPageNumberWatcher;

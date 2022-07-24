@@ -2,13 +2,12 @@ import {
     loginUserFail,
     loginUserRequest,
     loginUserSuccess,
-    setAuthStatus
 } from '../actions/actions'
 import authService from '../../../../../services/auth-service/authService'
 import tokenService from '../../../../../services/token-service/tokenService'
 import { call, put } from 'redux-saga/effects'
 
-export function* loginUserWorker(action) {
+function* loginUserWorker(action) {
     yield put(loginUserRequest())
     try {
         const result = yield call(authService.login, action.username, action.password);
@@ -25,12 +24,7 @@ export function* loginUserWorker(action) {
         }
         yield put(loginUserFail(errorMessage));
     }
-}
+};
 
-export function* logoutUserWorker() {
-    tokenService.removeAccessToken()
-    tokenService.removeRefreshToken()
-    yield put(setAuthStatus(false))
-}
-
+export default loginUserWorker;
 
