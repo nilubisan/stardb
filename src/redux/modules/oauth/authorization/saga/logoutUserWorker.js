@@ -1,11 +1,12 @@
 import { put } from 'redux-saga/effects'
-import { setAuthStatus } from '../actions/actions'
+import { logoutUserRequest, logoutUserSuccess } from '../actions/actions'
 import tokenService from '../../../../../services/token-service/tokenService'
 
 function* logoutUserWorker() {
+    yield put(logoutUserRequest())
     tokenService.removeAccessToken()
     tokenService.removeRefreshToken()
-    yield put(setAuthStatus(false))
+    yield put(logoutUserSuccess());
 };
 
 export default logoutUserWorker;

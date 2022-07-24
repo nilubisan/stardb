@@ -10,7 +10,7 @@ const ProtectedLayout = ({isAuth, loading, authenticateUser}) => {
     }, []);
     return (
         loading ? <Loader /> :
-            (!loading && isAuth) ? <Outlet /> : <Navigate to="/login" replace="true" />
+            (!loading && isAuth) ? <Outlet /> : <Navigate to="/login" />
     );
 };
 

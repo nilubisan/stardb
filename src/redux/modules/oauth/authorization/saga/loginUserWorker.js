@@ -14,7 +14,12 @@ function* loginUserWorker(action) {
         tokenService.setAccessToken(result.accessToken)
         tokenService.setRefreshToken(result.refreshToken)
         yield put(loginUserSuccess())
-        window.location.href = "/";
+        debugger
+        if(window.history.state.length === 0) {
+            window.location.href = "/";
+        }else {
+            window.history.back()
+        }
     } catch (e) {
         let errorMessage;
         if (e.response.status === 401) {
