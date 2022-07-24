@@ -21,7 +21,6 @@ export function* authenticateUserWorker() {
         if(!accessToken && refreshToken) {
             const tokens = yield call(authService.refreshToken, refreshToken)
             if(tokens) {
-                console.log(tokens[accessToken])
                 tokenService.setAccessToken(tokens["accessToken"])
                 tokenService.setRefreshToken(tokens["refreshToken"])
                 yield put(setAuthStatus(true))

@@ -30,21 +30,12 @@ describe("Login page test suites", () => {
     .contains(getMessageOnInvalidInputData());
   });
   it('Password value is validated by regexp before sending to server', () => {
-    cy.visit(HOME_PAGE_URL)
-    cy.login("Developer", "1234567")
-    cy.get('.login__error-message').as('error-message')
-    .contains(getMessageOnInvalidInputData());
-
-    cy.visit(HOME_PAGE_URL)
-    cy.login("Developer", "654321D")
-    cy.get('.login__error-message').as('error-message')
-    .contains(getMessageOnInvalidInputData());
-
-    cy.visit(HOME_PAGE_URL)
-    cy.login("Developer", "psw789654")
-    cy.get('.login__error-message').as('error-message')
-    .contains(getMessageOnInvalidInputData());
-
+    cy.wrap(["1234567", "654321D", "psw789654"]).each((password) => {
+      cy.visit(HOME_PAGE_URL);
+      cy.login("Developer", password);
+      cy.get('.login__error-message')
+      .contains(getMessageOnInvalidInputData());
+    })
   });
   it('User is redirected to main page after passing correct credentials', () => {
     cy.visit(HOME_PAGE_URL)
