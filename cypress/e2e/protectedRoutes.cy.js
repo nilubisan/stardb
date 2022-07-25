@@ -13,14 +13,18 @@ describe("Protected routes test suites", () => {
     it('Authorized user gets access to the pages located on the protected routes', () => {
         cy.visit(HOME_PAGE_URL);
         cy.fixture('credentials.json').then((data) => {
-            cy.login(data["username"], data["password"])
-          });
-        cy.wrap(protectedRoutes).each((path) => {
-            cy.visit(HOME_PAGE_URL + path)
-            cy.location().should((loc) => {
-                expect(loc.pathname).to.eq('/' + path)
+            cy.login(data['username'], data['password']).should(() => {
+                expect(localStorage.getItem('ACCESS_TOKEN')).to.be.an('string');
+                expect(localStorage.getItem('REFRESH_TOKEN')).to.be.an('string');
             })
-        })
+                cy.wrap(protectedRoutes).each((path) => {
+                    cy.visit(HOME_PAGE_URL + path);
+                    cy.location({timeout: 1500}).should((loc) => {
+                        expect(loc.pathname).to.eq('/' + path)
+                    })
+                })
+
+        });
     })
 
 })

@@ -126,7 +126,7 @@ const pages = ['persons', 'planets', 'starships'];
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, display: 'block' }}
               >
-                <NavLink className='header__navlink' to={`/${page}`}>{page.toUpperCase()}</NavLink>
+                <NavLink className='header__navlink' to={`/${page}`} data-cy={`${page}-navlink`}>{page.toUpperCase()}</NavLink>
               </Button>
             ))}
           </Box>

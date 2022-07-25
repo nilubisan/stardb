@@ -10,15 +10,22 @@
 //
 //
 // -- This is a parent command --
+const ACCESS_TOKEN = 'ACCESS_TOKEN';
+const REFRESH_TOKEN = 'REFRESH_TOKEN';
+
 Cypress.Commands.add('login', (username, password) => {
     cy.get('[data-cy="login-btn"]').click()
     cy.get('[data-cy="username-input"]').type(username);
     cy.get('[data-cy="password-input"]').type(password);
     cy.get('[data-cy="login-submit-button"]').click()
+
 })
 
 Cypress.Commands.add('logout', () => {
-    cy.get('[data-cy="logout-btn"]').click()
+    cy.get('[data-cy="logout-btn"]').click().should(() => {
+        expect(localStorage.getItem(ACCESS_TOKEN)).to.be.an('null');
+        expect(localStorage.getItem(REFRESH_TOKEN)).to.be.an('null');
+    })
 })
 //
 //

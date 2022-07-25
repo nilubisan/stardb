@@ -48,10 +48,7 @@ describe("Login page test suites", () => {
   it('Access and refresh tokens have been passed to window.localStorage after signing in', () => {
     cy.logout();
     cy.fixture('credentials.json').then((data) => {
-      cy.login(data["username"], data["password"]).should(() => {
-        expect(localStorage.getItem(ACCESS_TOKEN)).to.be.an('string');
-        expect(localStorage.getItem(REFRESH_TOKEN)).to.be.an('string');
-      })
+      cy.login(data["username"], data["password"])
     });
   });
 })

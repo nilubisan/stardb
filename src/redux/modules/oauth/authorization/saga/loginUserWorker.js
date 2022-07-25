@@ -14,7 +14,6 @@ function* loginUserWorker(action) {
         tokenService.setAccessToken(result.accessToken)
         tokenService.setRefreshToken(result.refreshToken)
         yield put(loginUserSuccess())
-        debugger
         if(window.history.state.length === 0) {
             window.location.href = "/";
         }else {
