@@ -27,6 +27,25 @@ Cypress.Commands.add('logout', () => {
         expect(localStorage.getItem(REFRESH_TOKEN)).to.be.an('null');
     })
 })
+
+Cypress.Commands.add('logout', () => {
+    cy.get('[data-cy="logout-btn"]').click().should(() => {
+        expect(localStorage.getItem(ACCESS_TOKEN)).to.be.an('null');
+        expect(localStorage.getItem(REFRESH_TOKEN)).to.be.an('null');
+    })
+})
+
+Cypress.Commands.add('checkIfTokensExists', () => {
+    expect(localStorage.getItem('ACCESS_TOKEN')).to.be.an('string');
+    expect(localStorage.getItem('REFRESH_TOKEN')).to.be.an('string');
+});
+
+// Cypress.Commands.add('checkIfTokens', () => {
+//     expect(localStorage.getItem('ACCESS_TOKEN')).to.be.an('string');
+//     expect(localStorage.getItem('REFRESH_TOKEN')).to.be.an('string');
+// });
+
+
 //
 //
 // -- This is a child command --
