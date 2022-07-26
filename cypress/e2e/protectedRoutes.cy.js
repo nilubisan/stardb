@@ -14,7 +14,7 @@ describe("Protected routes test suites", () => {
         cy.visit(HOME_PAGE_URL);
         cy.fixture('credentials.json').then((data) => {
             cy.login(data['username'], data['password']).should(() => {
-                cy.checkIfTokensExists();
+                cy.checkIfTokensExist();
             });
                 cy.wrap(protectedRoutes).each((path) => {
                     cy.visit(HOME_PAGE_URL + path);
@@ -22,7 +22,6 @@ describe("Protected routes test suites", () => {
                         expect(loc.pathname).to.eq('/' + path)
                     })
                 })
-
         });
     })
 

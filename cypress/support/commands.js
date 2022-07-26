@@ -35,15 +35,15 @@ Cypress.Commands.add('logout', () => {
     })
 })
 
-Cypress.Commands.add('checkIfTokensExists', () => {
+Cypress.Commands.add('checkIfTokensExist', () => {
     expect(localStorage.getItem('ACCESS_TOKEN')).to.be.an('string');
     expect(localStorage.getItem('REFRESH_TOKEN')).to.be.an('string');
 });
 
-// Cypress.Commands.add('checkIfTokens', () => {
-//     expect(localStorage.getItem('ACCESS_TOKEN')).to.be.an('string');
-//     expect(localStorage.getItem('REFRESH_TOKEN')).to.be.an('string');
-// });
+Cypress.Commands.add('checkIfTokensWipedOut', () => {
+    expect(localStorage.getItem('ACCESS_TOKEN')).to.be.an('null');
+    expect(localStorage.getItem('REFRESH_TOKEN')).to.be.an('null');
+});
 
 
 //
